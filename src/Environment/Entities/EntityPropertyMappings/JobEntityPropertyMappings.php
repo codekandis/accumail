@@ -23,8 +23,7 @@ class JobEntityPropertyMappings extends AbstractEntityPropertyMappings
 		parent::__construct(
 			new EntityPropertyMapping( 'status', null ),
 			new EntityPropertyMapping( 'timestampCreated', new DateTimeImmutableToStringBiDirectionalConverter( DateTimeFormats::LONG ) ),
-			new EntityPropertyMapping( 'timestampSent', new NullableDateTimeImmutableToNullableStringBiDirectionalConverter( DateTimeFormats::LONG ) ),
-			new EntityPropertyMapping( 'timestampFailed', new NullableDateTimeImmutableToNullableStringBiDirectionalConverter( DateTimeFormats::LONG ) )
+			new EntityPropertyMapping( 'timestampProcessed', new NullableDateTimeImmutableToNullableStringBiDirectionalConverter( DateTimeFormats::LONG ) )
 		);
 	}
 }

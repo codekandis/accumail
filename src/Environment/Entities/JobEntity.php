@@ -5,7 +5,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 
 /**
- * Represents a job entity.
+ * Repreprocesseds a job entity.
  * @package codekandis/accumail
  * @author Christian Ramelow <info@codekandis.net>
  */
@@ -30,16 +30,10 @@ class JobEntity extends AbstractEntity implements JobEntityInterface
 	public DateTimeInterface $timestampCreated;
 
 	/**
-	 * Stores the timestamp when the job has been sent.
+	 * Stores the timestamp when the job has been processed.
 	 * @var ?DateTimeInterface
 	 */
-	public ?DateTimeInterface $timestampSent = null;
-
-	/**
-	 * Stores the timestamp when the job has been failed.
-	 * @var ?DateTimeInterface
-	 */
-	public ?DateTimeInterface $timestampFailed = null;
+	public ?DateTimeInterface $timestampProcessed = null;
 
 	/**
 	 * Stores the server connection.
@@ -112,33 +106,17 @@ class JobEntity extends AbstractEntity implements JobEntityInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getTimestampSent(): ?DateTimeInterface
+	public function getTimestampProcessed(): ?DateTimeInterface
 	{
-		return $this->timestampSent;
+		return $this->timestampProcessed;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setTimestampSent( ?DateTimeInterface $timestampSent ): void
+	public function setTimestampProcessed( ?DateTimeInterface $timestampProcessed ): void
 	{
-		$this->timestampSent = $timestampSent;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getTimestampFailed(): ?DateTimeInterface
-	{
-		return $this->timestampFailed;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function setTimestampFailed( ?DateTimeInterface $timestampFailed ): void
-	{
-		$this->timestampFailed = $timestampFailed;
+		$this->timestampProcessed = $timestampProcessed;
 	}
 
 	/**

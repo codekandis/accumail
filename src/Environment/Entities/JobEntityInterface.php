@@ -4,7 +4,7 @@ namespace CodeKandis\AccuMail\Environment\Entities;
 use DateTimeInterface;
 
 /**
- * Represents the interface of any job entity.
+ * Repreprocesseds the interface of any job entity.
  * @package codekandis/accumail
  * @author Christian Ramelow <info@codekandis.net>
  */
@@ -47,28 +47,16 @@ interface JobEntityInterface extends EntityInterface
 	public function setTimestampCreated( DateTimeInterface $timestampCreated ): void;
 
 	/**
-	 * Gets the timestamp when the job has been sent.
-	 * @return ?DateTimeInterface The timestamp when the job has been sent.
+	 * Gets the timestamp when the job has been processed.
+	 * @return ?DateTimeInterface The timestamp when the job has been processed.
 	 */
-	public function getTimestampSent(): ?DateTimeInterface;
+	public function getTimestampProcessed(): ?DateTimeInterface;
 
 	/**
-	 * Sets the timestamp when the job has been sent.
-	 * @param ?DateTimeInterface $timestampSent The timestamp when the job has been sent.
+	 * Sets the timestamp when the job has been processed.
+	 * @param ?DateTimeInterface $timestampProcessed The timestamp when the job has been processed.
 	 */
-	public function setTimestampSent( ?DateTimeInterface $timestampSent ): void;
-
-	/**
-	 * Gets the timestamp when the job has been failed.
-	 * @return ?DateTimeInterface The timestamp when the job has been failed.
-	 */
-	public function getTimestampFailed(): ?DateTimeInterface;
-
-	/**
-	 * Sets the timestamp when the job has been failed.
-	 * @param ?DateTimeInterface $timestampFailed The timestamp when the job has been failed.
-	 */
-	public function setTimestampFailed( ?DateTimeInterface $timestampFailed ): void;
+	public function setTimestampProcessed( ?DateTimeInterface $timestampProcessed ): void;
 
 	/**
 	 * Gets the server connection.
