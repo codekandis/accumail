@@ -28,7 +28,13 @@
 		"source": "https://github.com/codekandis/accumail/tree/master"
 	},
 	"require": {
-		"php": "^7.4"
+		"php": "^7.4",
+		"codekandis/tiphy": "^0",
+		"codekandis/configurations": "^0",
+		"codekandis/sentry-client": "^1",
+		"codekandis/tiphy-sentry-client-integration": "^0",
+		"codekandis/authentication": "^0",
+		"codekandis/tiphy-authentication-integration": "^0"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-master",
@@ -37,7 +43,11 @@
 	"autoload": {
 		"psr-4": {
 			"CodeKandis\\AccuMail\\": [
+				"public/",
 				"src/"
+			],
+			"CodeKandis\\AccuMail\\Configurations\\Plain\\": [
+				"config/"
 			]
 		}
 	},
