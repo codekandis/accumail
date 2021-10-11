@@ -34,7 +34,12 @@
 		"codekandis/sentry-client": "^1",
 		"codekandis/tiphy-sentry-client-integration": "^0",
 		"codekandis/authentication": "^0",
-		"codekandis/tiphy-authentication-integration": "^0"
+		"codekandis/tiphy-authentication-integration": "^0",
+		"codekandis/logging": "^0",
+		"codekandis/console": "^0",
+		"codekandis/constants-classes-translator": "^1",
+		"symfony/console": "^5",
+		"phpmailer/phpmailer": "^6"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-master",
@@ -45,6 +50,9 @@
 			"CodeKandis\\AccuMail\\": [
 				"public/",
 				"src/"
+			],
+			"CodeKandis\\AccuMail\\Bin\\": [
+				"bin/"
 			],
 			"CodeKandis\\AccuMail\\Configurations\\Plain\\": [
 				"config/"
