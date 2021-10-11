@@ -30,6 +30,7 @@ use Psr\Log\LogLevel;
 use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function set_time_limit;
 
 /**
  * Represents the command to send all e-mails.
@@ -62,6 +63,8 @@ class SendAll extends AbstractCommand
 	 */
 	protected function execute( InputInterface $input, OutputInterface $output ): int
 	{
+		set_time_limit( 0 );
+
 		$jobs = $this->readJobs();
 
 		foreach ( $jobs as $job )
