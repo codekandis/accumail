@@ -7,7 +7,7 @@ use CodeKandis\Tiphy\Actions\ActionDispatcher;
 use CodeKandis\Tiphy\Persistence\MariaDb\Connector;
 use CodeKandis\TiphyAuthenticationIntegration\Actions\PreDispatchment\Api\AuthorizationHeaderKeyAuthenticationPreDispatcher;
 use CodeKandis\TiphyAuthenticationIntegration\Persistence\Repositories\Authentication\UsersRepository;
-use CodeKandis\TiphySentryClientIntegration\Development\Throwables\Handlers\InternalServerErrorThrowableHandler;
+use CodeKandis\TiphySentryClientIntegration\Throwables\Handlers\InternalServerErrorThrowableHandler;
 use function dirname;
 use function error_reporting;
 use function ini_set;
