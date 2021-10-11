@@ -46,4 +46,10 @@ interface JobEntityRepositoryInterface
 	 * @return JobEntityInterface The job with the record ID of the created job.
 	 */
 	public function createJobByUserId( JobEntityInterface $job, UserEntityInterface $user ): JobEntityInterface;
+
+	/**
+	 * Updates the status of a job.
+	 * @param JobEntityInterface $job The job to update its status.
+	 */
+	public function updateJobStatus( JobEntityInterface $job ): void;
 }

@@ -200,4 +200,38 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 			]
 		);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * @throws ReflectionException The job entity class to reflect does not exist.
+	 * @throws TransactionStartFailedException The transaction failed to start.
+	 * @throws TransactionRollbackFailedException The transaction failed to roll back.
+	 * @throws TransactionCommitFailedException The transaction failed to commit.
+	 * @throws InvalidArgumentsStatementsCountException The number of argument lists does not match the number of statements.
+	 * @throws StatementPreparationFailedException The preparation of the statement failed.
+	 * @throws StatementExecutionFailedException The execution of the statement failed.
+	 */
+	public function updateJobStatus( JobEntityInterface $job ): void
+	{
+		$query = <<< END
+			UPDATE
+				`jobs`
+			SET
+				`status` = :status,
+			    `timestampProcessed` = :timestampProcessed
+			WHERE
+				`id` = :id;
+		END;
+
+		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildJobEntityPropertyMapper();
+		$mappedJob               = $jobEntityPropertyMapper->mapToArray( $job );
+		$arguments               = [
+			'id'                 => $mappedJob[ 'id' ],
+			'status'             => $mappedJob[ 'status' ],
+			'timestampProcessed' => $mappedJob[ 'timestampProcessed' ]
+		];
+
+		$this->databaseConnector->execute( $query, $arguments );
+	}
 }
