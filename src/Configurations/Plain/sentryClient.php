@@ -8,6 +8,6 @@ return [
 	'displayErrors' => false,
 	'errorTypes'    => E_ALL,
 	'environment'   => 'development',
-	'release'       => 'dev-development',
+	'release'       => '0.1.0',
 	'serverName'    => 'accumail.codekandis'
 ];
