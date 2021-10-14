@@ -31,6 +31,7 @@ use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use function set_time_limit;
+use function sprintf;
 
 /**
  * Represents the command to send all e-mails.
@@ -250,6 +251,14 @@ class SendAll extends AbstractCommand
 	 */
 	private function processJob( JobEntityInterface $job ): void
 	{
+		$this->logger->log(
+			LogLevel::INFO,
+			sprintf(
+				'Processing job: %s',
+				$job->getId()
+			)
+		);
+
 		( new Mailer( $job ) )
 			->process();
 	}
@@ -269,7 +278,7 @@ class SendAll extends AbstractCommand
 		$this->logger->log(
 			LogLevel::INFO,
 			sprintf(
-				'Processing job: %s',
+				'Updating job status: %s',
 				$job->getId()
 			)
 		);
