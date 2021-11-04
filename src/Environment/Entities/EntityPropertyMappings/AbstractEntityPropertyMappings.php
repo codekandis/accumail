@@ -1,10 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings;
 
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMapping;
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMappingExistsException;
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMappingInterface;
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMappings;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMapping;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMappingExistsException;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMappingInterface;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMappings;
 
 /**
  * Represents the base class of all entity property mappings.
@@ -21,9 +21,8 @@ abstract class AbstractEntityPropertyMappings extends EntityPropertyMappings
 	public function __construct( EntityPropertyMappingInterface ...$entityPropertyMappings )
 	{
 		parent::__construct(
-			new EntityPropertyMapping( '_id', null ),
 			new EntityPropertyMapping( 'id', null ),
-			...$entityPropertyMappings,
+			...$entityPropertyMappings
 		);
 	}
 }

@@ -1,8 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\ApiKeyEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\Collections\ApiKeyEntityCollectionInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\ApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\ApiKeyEntityCollectionInterface;
 
 /**
  * Represents the interface of any repository of any API key entity.
@@ -19,10 +20,10 @@ interface ApiKeyEntityRepositoryInterface
 
 	/**
 	 * Reads an API key by its record ID.
-	 * @param ApiKeyEntityInterface $apiKey The API key with the record ID to find.
+	 * @param PersistableApiKeyEntityInterface $apiKey The API key with the record ID to find.
 	 * @return ?ApiKeyEntityInterface The API key if found, otherwise null.
 	 */
-	public function readApiKeyByRecordId( ApiKeyEntityInterface $apiKey ): ?ApiKeyEntityInterface;
+	public function readApiKeyByRecordId( PersistableApiKeyEntityInterface $apiKey ): ?ApiKeyEntityInterface;
 
 	/**
 	 * Reads an API key by its ID.

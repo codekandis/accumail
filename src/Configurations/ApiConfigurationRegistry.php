@@ -1,7 +1,14 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Configurations;
 
-use CodeKandis\TiphySentryClientIntegration\Configurations\AbstractConfigurationRegistry;
+use CodeKandis\Configurations\PlainConfigurationLoader;
+use CodeKandis\Tiphy\Configurations\AbstractConfigurationRegistry;
+use CodeKandis\Tiphy\Configurations\RoutesConfiguration;
+use CodeKandis\Tiphy\Configurations\UriBuilderConfiguration;
+use CodeKandis\TiphyPersistenceIntegration\Configurations\ConfigurationRegistryTrait as PersistenceConfigurationRegistryTrait;
+use CodeKandis\TiphyPersistenceIntegration\Configurations\PersistenceConfiguration;
+use CodeKandis\TiphySentryClientIntegration\Configurations\ConfigurationRegistryTrait as SentryClientConfigurationRegistryTrait;
+use CodeKandis\TiphySentryClientIntegration\Configurations\SentryClientConfiguration;
 use function dirname;
 
 /**
@@ -11,6 +18,9 @@ use function dirname;
  */
 class ApiConfigurationRegistry extends AbstractConfigurationRegistry implements ApiConfigurationRegistryInterface
 {
+	use SentryClientConfigurationRegistryTrait;
+	use PersistenceConfigurationRegistryTrait;
+
 	/**
 	 * Creates the singleton instance of the API configuration registry.
 	 * @return ApiConfigurationRegistryInterface The singleton instance of the API configuration registry.
@@ -25,29 +35,29 @@ class ApiConfigurationRegistry extends AbstractConfigurationRegistry implements 
 	 */
 	protected function initialize(): void
 	{
-		$this->setPlainSentryClientConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/sentryClient.php',
-				require dirname( __DIR__, 2 ) . '/config/sentryClient.php'
-			)
+		$this->sentryClientConfiguration = new SentryClientConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'sentryClient' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'sentryClient' )
+				->getPlainConfiguration()
 		);
-		$this->setPlainPersistenceConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/persistence.php',
-				require dirname( __DIR__, 2 ) . '/config/persistence.php'
-			)
+		$this->persistenceConfiguration  = new PersistenceConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'persistence' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'persistence' )
+				->getPlainConfiguration()
 		);
-		$this->setPlainRoutesConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/routes.php',
-				require dirname( __DIR__, 2 ) . '/config/routes.php'
-			)
+		$this->routesConfiguration       = new RoutesConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'routes' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'routes' )
+				->getPlainConfiguration()
 		);
-		$this->setPlainUriBuilderConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/apiUriBuilder.php',
-				require dirname( __DIR__, 2 ) . '/config/uriBuilder.php'
-			)
+		$this->uriBuilderConfiguration   = new UriBuilderConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'apiUriBuilder' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'uriBuilder' )
+				->getPlainConfiguration()
 		);
 	}
 }

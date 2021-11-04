@@ -1,20 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\ApiKeyEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\Collections\UserEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\UserEntityCollectionInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\UserEntityInterface;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableUserEntityInterface;
+use CodeKandis\AccuMailEntities\ApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\UserEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\UserEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\UserEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -65,7 +66,7 @@ class UserEntityRepository extends AbstractRepository implements UserEntityRepos
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readUserByRecordId( UserEntityInterface $user ): ?UserEntityInterface
+	public function readUserByRecordId( PersistableUserEntityInterface $user ): ?UserEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -78,11 +79,15 @@ class UserEntityRepository extends AbstractRepository implements UserEntityRepos
 				0, 1;
 		END;
 
-		$userEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableUserEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableUserEntityPropertyMapper();
+		$userEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildUserEntityPropertyMapper();
-		$mappedUser               = $userEntityPropertyMapper->mapToArray( $user );
-		$arguments                = [
-			'_id' => $mappedUser[ '_id' ]
+
+		$mappedPersistableUser = $persistableUserEntityPropertyMapper->mapToArray( $user );
+
+		$arguments = [
+			'_id' => $mappedPersistableUser[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $userEntityPropertyMapper );
@@ -114,8 +119,10 @@ class UserEntityRepository extends AbstractRepository implements UserEntityRepos
 
 		$userEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildUserEntityPropertyMapper();
-		$mappedUser               = $userEntityPropertyMapper->mapToArray( $user );
-		$arguments                = [
+
+		$mappedUser = $userEntityPropertyMapper->mapToArray( $user );
+
+		$arguments = [
 			'id' => $mappedUser[ 'id' ]
 		];
 
@@ -155,8 +162,10 @@ class UserEntityRepository extends AbstractRepository implements UserEntityRepos
 			->buildApiKeyEntityPropertyMapper();
 		$userEntityPropertyMapper   = ( new EntityPropertyMapperBuilder() )
 			->buildUserEntityPropertyMapper();
-		$mappedApiKey               = $apiKeyEntityPropertyMapper->mapToArray( $apiKey );
-		$arguments                  = [
+
+		$mappedApiKey = $apiKeyEntityPropertyMapper->mapToArray( $apiKey );
+
+		$arguments = [
 			'key' => $mappedApiKey[ 'key' ]
 		];
 
@@ -196,8 +205,10 @@ class UserEntityRepository extends AbstractRepository implements UserEntityRepos
 			->buildJobEntityPropertyMapper();
 		$userEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildUserEntityPropertyMapper();
-		$mappedJob                = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments                = [
+
+		$mappedJob = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'jobId' => $mappedJob[ 'id' ]
 		];
 

@@ -1,10 +1,11 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\ApiKeyEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\Collections\UserEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\UserEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableUserEntityInterface;
+use CodeKandis\AccuMailEntities\ApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\UserEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\UserEntityInterface;
 
 /**
  * Represents the interface of any repository of any user entity.
@@ -21,10 +22,10 @@ interface UserEntityRepositoryInterface
 
 	/**
 	 * Reads a user by its record ID.
-	 * @param UserEntityInterface $user The user with the record ID to find.
+	 * @param PersistableUserEntityInterface $user The user with the record ID to find.
 	 * @return ?UserEntityInterface The user if found, otherwise null.
 	 */
-	public function readUserByRecordId( UserEntityInterface $user ): ?UserEntityInterface;
+	public function readUserByRecordId( PersistableUserEntityInterface $user ): ?UserEntityInterface;
 
 	/**
 	 * Reads a user by its ID.

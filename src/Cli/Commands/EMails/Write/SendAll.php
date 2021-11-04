@@ -3,13 +3,6 @@ namespace CodeKandis\AccuMail\Cli\Commands\EMails\Write;
 
 use CodeKandis\AccuMail\Cli\Commands\AbstractCommand;
 use CodeKandis\AccuMail\Environment\EMails\Mailer;
-use CodeKandis\AccuMail\Environment\Entities\Collections\JobEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntity;
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\EMailTypes;
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\JobStatuses;
-use CodeKandis\AccuMail\Environment\Entities\JobEntity;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAddressEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAttachmentEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailEntityRepository;
@@ -17,19 +10,27 @@ use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\JobEntityRe
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionAuthenticationCredentialEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\UserEntityRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMailEntities\Collections\JobEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAddressEntity;
+use CodeKandis\AccuMailEntities\EMailEntity;
+use CodeKandis\AccuMailEntities\Enumerations\EMailAddressTypes;
+use CodeKandis\AccuMailEntities\Enumerations\JobStatuses;
+use CodeKandis\AccuMailEntities\JobEntity;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use DateTimeImmutable;
 use PHPMailer\PHPMailer\Exception;
 use Psr\Log\LogLevel;
 use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function count;
 use function set_time_limit;
 use function sprintf;
 
@@ -173,7 +174,7 @@ class SendAll extends AbstractCommand
 								),
 								EMailAddressEntity::fromArray(
 									[
-										'type' => EMailTypes::TO
+										'type' => EMailAddressTypes::TO
 									]
 								)
 							)
@@ -190,7 +191,7 @@ class SendAll extends AbstractCommand
 								),
 								EMailAddressEntity::fromArray(
 									[
-										'type' => EMailTypes::CC
+										'type' => EMailAddressTypes::CC
 									]
 								)
 							)
@@ -207,7 +208,7 @@ class SendAll extends AbstractCommand
 								),
 								EMailAddressEntity::fromArray(
 									[
-										'type' => EMailTypes::BCC
+										'type' => EMailAddressTypes::BCC
 									]
 								)
 							)

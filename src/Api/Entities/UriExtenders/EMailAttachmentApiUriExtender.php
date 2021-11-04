@@ -2,7 +2,7 @@
 namespace CodeKandis\AccuMail\Api\Entities\UriExtenders;
 
 use CodeKandis\AccuMail\Api\Http\UriBuilders\ApiUriBuilderInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAttachmentEntityInterface;
+use CodeKandis\AccuMailEntities\EMailAttachmentEntityInterface;
 
 /**
  * Represents an API URI extender of any e-mail attachment.

@@ -3,23 +3,23 @@ namespace CodeKandis\AccuMail\Api\Actions\Get;
 
 use CodeKandis\AccuMail\Api\Actions\AbstractReadAction;
 use CodeKandis\AccuMail\Api\Entities\UriExtenders\JobApiUriExtender;
-use CodeKandis\AccuMail\Environment\Entities\Collections\JobEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntity;
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\EMailTypes;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAddressEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAttachmentEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionAuthenticationCredentialEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\UserEntityRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMailEntities\Collections\JobEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAddressEntity;
+use CodeKandis\AccuMailEntities\EMailEntity;
+use CodeKandis\AccuMailEntities\Enumerations\EMailAddressTypes;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -47,7 +47,6 @@ abstract class AbstractJobsAction extends AbstractReadAction
 
 	/**
 	 * Reads all jobs by a specific status.
-	 * @return JobEntityCollectionInterface The jobs.
 	 * @throws ReflectionException An entity class to reflect does not exist.
 	 * @throws TransactionStartFailedException The transaction failed to start.
 	 * @throws TransactionRollbackFailedException The transaction failed to roll back.
@@ -112,7 +111,7 @@ abstract class AbstractJobsAction extends AbstractReadAction
 						),
 						EMailAddressEntity::fromArray(
 							[
-								'type' => EMailTypes::TO
+								'type' => EMailAddressTypes::TO
 							]
 						)
 					)
@@ -129,7 +128,7 @@ abstract class AbstractJobsAction extends AbstractReadAction
 						),
 						EMailAddressEntity::fromArray(
 							[
-								'type' => EMailTypes::CC
+								'type' => EMailAddressTypes::CC
 							]
 						)
 					)
@@ -146,7 +145,7 @@ abstract class AbstractJobsAction extends AbstractReadAction
 						),
 						EMailAddressEntity::fromArray(
 							[
-								'type' => EMailTypes::BCC
+								'type' => EMailAddressTypes::BCC
 							]
 						)
 					)

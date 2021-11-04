@@ -2,7 +2,7 @@
 namespace CodeKandis\AccuMail\Api\Entities\UriExtenders;
 
 use CodeKandis\AccuMail\Api\Http\UriBuilders\ApiUriBuilderInterface;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
 
 /**
  * Represents an API URI extender of any job.

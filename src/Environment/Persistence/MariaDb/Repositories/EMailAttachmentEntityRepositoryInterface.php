@@ -1,9 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAttachmentEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAttachmentEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableEMailAttachmentEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\EMailAttachmentEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAttachmentEntityInterface;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
 
 /**
  * Represents the interface of any repository of any e-mail attachment entity.
@@ -34,10 +35,10 @@ interface EMailAttachmentEntityRepositoryInterface
 
 	/**
 	 * Reads an e-mail attachment by its record ID.
-	 * @param EMailAttachmentEntityInterface $eMailAttachment The e-mail attachment with the record ID to find.
+	 * @param PersistableEMailAttachmentEntityInterface $eMailAttachment The e-mail attachment with the record ID to find.
 	 * @return ?EMailAttachmentEntityInterface The e-mail attachment if found, otherwise null.
 	 */
-	public function readEMailAttachmentByRecordId( EMailAttachmentEntityInterface $eMailAttachment ): ?EMailAttachmentEntityInterface;
+	public function readEMailAttachmentByRecordId( PersistableEMailAttachmentEntityInterface $eMailAttachment ): ?EMailAttachmentEntityInterface;
 
 	/**
 	 * Reads an e-mail attachment by its ID.
@@ -57,7 +58,7 @@ interface EMailAttachmentEntityRepositoryInterface
 	 * Creates an e-mail attachment by its e-mail ID.
 	 * @param EMailAttachmentEntityInterface $eMailAttachment The e-mail attachment to create.
 	 * @param EMailEntityInterface $eMail The e-mail with the e-mail ID.
-	 * @return EMailAttachmentEntityInterface The e-mail attachment with the record ID of the created e-mail attachment.
+	 * @return PersistableEMailAttachmentEntityInterface The e-mail attachment with the record ID of the created e-mail attachment.
 	 */
-	public function createEMailAttachmentByEMailId( EMailAttachmentEntityInterface $eMailAttachment, EMailEntityInterface $eMail ): EMailAttachmentEntityInterface;
+	public function createEMailAttachmentByEMailId( EMailAttachmentEntityInterface $eMailAttachment, EMailEntityInterface $eMail ): PersistableEMailAttachmentEntityInterface;
 }

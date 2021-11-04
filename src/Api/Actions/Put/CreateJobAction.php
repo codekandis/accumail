@@ -3,20 +3,6 @@ namespace CodeKandis\AccuMail\Api\Actions\Put;
 
 use CodeKandis\AccuMail\Api\Actions\AbstractWriteAction;
 use CodeKandis\AccuMail\Api\Entities\UriExtenders\JobApiUriExtender;
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAddressEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAttachmentEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailAttachmentEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\EMailTypes;
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\JobStatuses;
-use CodeKandis\AccuMail\Environment\Entities\JobEntity;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionAuthenticationCredentialEntity;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntity;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\UserEntityInterface;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAddressEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailAttachmentEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\EMailEntityRepository;
@@ -24,16 +10,30 @@ use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\JobEntityRe
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionAuthenticationCredentialEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\ServerConnectionEntityRepository;
 use CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories\UserEntityRepository;
+use CodeKandis\AccuMailEntities\Collections\EMailAddressEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\EMailAttachmentEntityCollection;
+use CodeKandis\AccuMailEntities\EMailAddressEntity;
+use CodeKandis\AccuMailEntities\EMailAttachmentEntity;
+use CodeKandis\AccuMailEntities\EMailEntity;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
+use CodeKandis\AccuMailEntities\Enumerations\EMailAddressTypes;
+use CodeKandis\AccuMailEntities\Enumerations\JobStatuses;
+use CodeKandis\AccuMailEntities\JobEntity;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\ServerConnectionAuthenticationCredentialEntity;
+use CodeKandis\AccuMailEntities\ServerConnectionEntity;
+use CodeKandis\AccuMailEntities\ServerConnectionEntityInterface;
+use CodeKandis\AccuMailEntities\UserEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use CodeKandis\Tiphy\Http\Requests\BadRequestException;
 use CodeKandis\Tiphy\Http\Responses\JsonResponder;
 use CodeKandis\Tiphy\Http\Responses\StatusCodes;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
 use CodeKandis\Tiphy\Throwables\ErrorInformation;
 use DateTimeImmutable;
 use JsonException;
@@ -132,14 +132,14 @@ class CreateJobAction extends AbstractWriteAction
 	{
 		return EMailEntity::fromArray(
 			[
-				'fromAddress'   => EMailAddressEntity::fromArray(
+				'fromAddress'     => EMailAddressEntity::fromArray(
 					[
 						'type'    => 'FROM',
 						'name'    => $inputData->{'eMail'}->{'fromAddress'}->{'name'},
 						'address' => $inputData->{'eMail'}->{'fromAddress'}->{'address'}
 					]
 				),
-				'toAddresses'   => new EMailAddressEntityCollection(
+				'toAddresses'     => new EMailAddressEntityCollection(
 					...array_map(
 						fn( stdClass $toAddress ) => EMailAddressEntity::fromArray(
 							[
@@ -151,7 +151,7 @@ class CreateJobAction extends AbstractWriteAction
 						$inputData->{'eMail'}->{'toAddresses'}
 					)
 				),
-				'ccAddresses'   => new EMailAddressEntityCollection(
+				'ccAddresses'     => new EMailAddressEntityCollection(
 					...array_map(
 						fn( stdClass $ccAddress ) => EMailAddressEntity::fromArray(
 							[
@@ -163,7 +163,7 @@ class CreateJobAction extends AbstractWriteAction
 						$inputData->{'eMail'}->{'ccAddresses'}
 					)
 				),
-				'bccAddresses'  => new EMailAddressEntityCollection(
+				'bccAddresses'    => new EMailAddressEntityCollection(
 					...array_map(
 						fn( stdClass $bccAddress ) => EMailAddressEntity::fromArray(
 							[
@@ -175,10 +175,11 @@ class CreateJobAction extends AbstractWriteAction
 						$inputData->{'eMail'}->{'bccAddresses'}
 					)
 				),
-				'subject'       => $inputData->{'eMail'}->{'subject'},
-				'plainTextBody' => $inputData->{'eMail'}->{'plainTextBody'},
-				'htmlBody'      => $inputData->{'eMail'}->{'htmlBody'},
-				'attachments'   => new EMailAttachmentEntityCollection(
+				'subject'         => $inputData->{'eMail'}->{'subject'},
+				'isHtmlBody'      => $inputData->{'eMail'}->{'isHtmlBody'},
+				'body'            => $inputData->{'eMail'}->{'body'},
+				'alternativeBody' => $inputData->{'eMail'}->{'alternativeBody'},
+				'attachments'     => new EMailAttachmentEntityCollection(
 					...array_map(
 						fn( stdClass $attachment ) => EMailAttachmentEntity::fromObject( $attachment ),
 						$inputData->{'eMail'}->{'attachments'}
@@ -275,7 +276,7 @@ class CreateJobAction extends AbstractWriteAction
 							),
 							EMailAddressEntity::fromArray(
 								[
-									'type' => EMailTypes::TO
+									'type' => EMailAddressTypes::TO
 								]
 							)
 						)
@@ -292,7 +293,7 @@ class CreateJobAction extends AbstractWriteAction
 							),
 							EMailAddressEntity::fromArray(
 								[
-									'type' => EMailTypes::CC
+									'type' => EMailAddressTypes::CC
 								]
 							)
 						)
@@ -309,7 +310,7 @@ class CreateJobAction extends AbstractWriteAction
 							),
 							EMailAddressEntity::fromArray(
 								[
-									'type' => EMailTypes::BCC
+									'type' => EMailAddressTypes::BCC
 								]
 							)
 						)

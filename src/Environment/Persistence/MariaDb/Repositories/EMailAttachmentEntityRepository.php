@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAttachmentEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAttachmentEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAttachmentEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailAttachmentEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\InvalidArgumentsStatementsCountException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableEMailAttachmentEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\EMailAttachmentEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\EMailAttachmentEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAttachmentEntityInterface;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\InvalidArgumentsStatementsCountException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -83,8 +83,10 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 			->buildEMailEntityPropertyMapper();
 		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMail                         = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                           = [
+
+		$mappedEMail = $eMailEntityPropertyMapper->mapToArray( $eMail );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ]
 		];
 
@@ -124,8 +126,10 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 			->buildEMailEntityPropertyMapper();
 		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMail                         = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                           = [
+
+		$mappedEMail = $eMailEntityPropertyMapper->mapToArray( $eMail );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ]
 		];
 
@@ -145,7 +149,7 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readEMailAttachmentByRecordId( EMailAttachmentEntityInterface $eMailAttachment ): ?EMailAttachmentEntityInterface
+	public function readEMailAttachmentByRecordId( PersistableEMailAttachmentEntityInterface $eMailAttachment ): ?EMailAttachmentEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -158,11 +162,15 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 				0, 1;
 		END;
 
-		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableEMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableEMailAttachmentEntityPropertyMapper();
+		$eMailAttachmentEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMailAttachment               = $eMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
-		$arguments                           = [
-			'_id' => $mappedEMailAttachment[ '_id' ]
+
+		$mappedPersistableEMailAttachment = $persistableEMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
+
+		$arguments = [
+			'_id' => $mappedPersistableEMailAttachment[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $eMailAttachmentEntityPropertyMapper );
@@ -194,8 +202,10 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 
 		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMailAttachment               = $eMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
-		$arguments                           = [
+
+		$mappedEMailAttachment = $eMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
+
+		$arguments = [
 			'id' => $mappedEMailAttachment[ 'id' ]
 		];
 
@@ -231,8 +241,10 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 			->buildEMailEntityPropertyMapper();
 		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMail                         = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                           = [
+
+		$mappedEMail = $eMailEntityPropertyMapper->mapToArray( $eMail );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ]
 		];
 
@@ -250,7 +262,7 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 	 * @throws StatementPreparationFailedException The preparation of the statement failed.
 	 * @throws StatementExecutionFailedException The execution of the statement failed.
 	 */
-	public function createEMailAttachmentByEMailId( EMailAttachmentEntityInterface $eMailAttachment, EMailEntityInterface $eMail ): EMailAttachmentEntityInterface
+	public function createEMailAttachmentByEMailId( EMailAttachmentEntityInterface $eMailAttachment, EMailEntityInterface $eMail ): PersistableEMailAttachmentEntityInterface
 	{
 		$query = <<< END
 			INSERT INTO
@@ -260,13 +272,16 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 				( UUID( ), :eMailId, :name, :content );
 		END;
 
-		$eMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$eMailAttachmentEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAttachmentEntityPropertyMapper();
-		$mappedEMailAttachment               = $eMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
-		$eMailEntityPropertyMapper           = ( new EntityPropertyMapperBuilder() )
+		$eMailEntityPropertyMapper                      = ( new EntityPropertyMapperBuilder() )
 			->buildEMailEntityPropertyMapper();
-		$mappedEMail                         = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                           = [
+		$persistableEMailAttachmentEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableEMailAttachmentEntityPropertyMapper();
+
+		$mappedEMailAttachment = $eMailAttachmentEntityPropertyMapper->mapToArray( $eMailAttachment );
+		$mappedEMail           = $eMailEntityPropertyMapper->mapToArray( $eMail );
+		$arguments             = [
 			'eMailId' => $mappedEMail[ 'id' ],
 			'name'    => $mappedEMailAttachment[ 'name' ],
 			'content' => $mappedEMailAttachment[ 'content' ]
@@ -274,7 +289,7 @@ class EMailAttachmentEntityRepository extends AbstractRepository implements EMai
 
 		$this->databaseConnector->execute( $query, $arguments );
 
-		return EMailAttachmentEntity::fromArray(
+		return $persistableEMailAttachmentEntityPropertyMapper->mapFromArray(
 			[
 				'_id' => $this->databaseConnector->getLastInsertId()
 			]
