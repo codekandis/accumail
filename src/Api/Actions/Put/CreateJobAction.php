@@ -40,6 +40,7 @@ use JsonException;
 use ReflectionException;
 use stdClass;
 use function array_map;
+use function set_time_limit;
 
 /**
  * Represents the action to put a job.
@@ -63,6 +64,8 @@ class CreateJobAction extends AbstractWriteAction
 	 */
 	public function execute(): void
 	{
+		set_time_limit( 0 );
+
 		try
 		{
 			$inputData = $this->getInputData(
