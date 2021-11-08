@@ -81,7 +81,7 @@ class SendAll extends AbstractCommand
 			}
 			catch ( Exception $exception )
 			{
-				$this->logger->log( LogLevel::ERROR, 'Failed.' );
+				$this->logger->log( LogLevel::ERROR, $exception->getMessage() );
 				$job->setStatus( JobStatuses::SENT_FAILED );
 			}
 
