@@ -5,7 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [keep a changelog][xtlink-keep-a-changelog]
 and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioning].
 
+## [0.2.0] - 2021-11-09
 
+### Fixed
+
+* forced the `UTF-8` e-mail charset
+
+### Changed
+
+* composer package dependencies
+    * added
+        * `codekandis/accumail-entities` [^0]
+        * `codekandis/converters` [^0]
+        * `codekandis/peristence` [^0]
+        * `codekandis/tiphy-persistence-integration` [^0]
+        * `codekandis/validators` [^0]
+* updated the log messages
+* `README.md`
+
+### Added
+
+* script execution timeout for the job creation
+* implementation of the newly added composer packages
+
+[0.2.0]: https://github.com/codekandis/accumail/compare/0.1.2..0.2.0
+
+---
 ## [0.1.2] - 2021-10-14
 
 ### Added
