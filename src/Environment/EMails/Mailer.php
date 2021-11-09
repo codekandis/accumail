@@ -88,6 +88,8 @@ class Mailer implements MailerInterface
 			);
 		}
 
+		$phpMailer->CharSet = PHPMailer::CHARSET_UTF8;
+
 		$phpMailer->Subject = $this->job->getEMail()->getSubject();
 
 		$phpMailer->isHTML( $this->job->getEMail()->getIsHtmlBody() );
