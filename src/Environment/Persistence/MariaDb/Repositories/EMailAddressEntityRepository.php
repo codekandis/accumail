@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAddressEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAddressEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntity;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\InvalidArgumentsStatementsCountException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableEMailAddressEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\EMailAddressEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\EMailAddressEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAddressEntityInterface;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\InvalidArgumentsStatementsCountException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -86,9 +86,11 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 			->buildEMailEntityPropertyMapper();
 		$eMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAddressEntityPropertyMapper();
-		$mappedEMail                      = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$mappedEMailAddress               = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
-		$arguments                        = [
+
+		$mappedEMail        = $eMailEntityPropertyMapper->mapToArray( $eMail );
+		$mappedEMailAddress = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ],
 			'type'    => $mappedEMailAddress[ 'type' ]
 		];
@@ -109,7 +111,7 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readEMailAddressByRecordId( EMailAddressEntityInterface $eMailAddress ): ?EMailAddressEntityInterface
+	public function readEMailAddressByRecordId( PersistableEMailAddressEntityInterface $eMailAddress ): ?EMailAddressEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -122,11 +124,15 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 				0, 1;
 		END;
 
-		$eMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableEMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableEMailAddressEntityPropertyMapper();
+		$eMailAddressEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAddressEntityPropertyMapper();
-		$mappedEMailAddress               = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
-		$arguments                        = [
-			'_id' => $mappedEMailAddress[ '_id' ]
+
+		$mappedPersistableEMailAddress = $persistableEMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
+
+		$arguments = [
+			'_id' => $mappedPersistableEMailAddress[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $eMailAddressEntityPropertyMapper );
@@ -158,8 +164,10 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 
 		$eMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAddressEntityPropertyMapper();
-		$mappedEMailAddress               = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
-		$arguments                        = [
+
+		$mappedEMailAddress = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
+
+		$arguments = [
 			'id' => $mappedEMailAddress[ 'id' ]
 		];
 
@@ -195,8 +203,10 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 			->buildEMailEntityPropertyMapper();
 		$eMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAddressEntityPropertyMapper();
-		$mappedEMail                      = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                        = [
+
+		$mappedEMail = $eMailEntityPropertyMapper->mapToArray( $eMail );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ]
 		];
 
@@ -214,7 +224,7 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 	 * @throws StatementPreparationFailedException The preparation of the statement failed.
 	 * @throws StatementExecutionFailedException The execution of the statement failed.
 	 */
-	public function createEMailAddressByEMailId( EMailAddressEntityInterface $eMailAddress, EMailEntityInterface $eMail ): EMailAddressEntityInterface
+	public function createEMailAddressByEMailId( EMailAddressEntityInterface $eMailAddress, EMailEntityInterface $eMail ): PersistableEMailAddressEntityInterface
 	{
 		$query = <<< END
 			INSERT INTO
@@ -224,13 +234,17 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 				( UUID( ), :eMailId, :type, :name, :address );
 		END;
 
-		$eMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$eMailAddressEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildEMailAddressEntityPropertyMapper();
-		$mappedEMailAddress               = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
-		$eMailEntityPropertyMapper        = ( new EntityPropertyMapperBuilder() )
+		$eMailEntityPropertyMapper                   = ( new EntityPropertyMapperBuilder() )
 			->buildEMailEntityPropertyMapper();
-		$mappedEMail                      = $eMailEntityPropertyMapper->mapToArray( $eMail );
-		$arguments                        = [
+		$persistableEMailAddressEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableEMailAddressEntityPropertyMapper();
+
+		$mappedEMailAddress = $eMailAddressEntityPropertyMapper->mapToArray( $eMailAddress );
+		$mappedEMail        = $eMailEntityPropertyMapper->mapToArray( $eMail );
+
+		$arguments = [
 			'eMailId' => $mappedEMail[ 'id' ],
 			'type'    => $mappedEMailAddress[ 'type' ],
 			'name'    => $mappedEMailAddress[ 'name' ],
@@ -239,7 +253,7 @@ class EMailAddressEntityRepository extends AbstractRepository implements EMailAd
 
 		$this->databaseConnector->execute( $query, $arguments );
 
-		return EMailAddressEntity::fromArray(
+		return $persistableEMailAddressEntityPropertyMapper->mapFromArray(
 			[
 				'_id' => $this->databaseConnector->getLastInsertId()
 			]

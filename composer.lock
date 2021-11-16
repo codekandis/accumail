@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b068db71e4d99cbb8bd60294e1956bd4",
+    "content-hash": "810ae7fe12d2449766600c253f079576",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -73,6 +73,69 @@
             "time": "2020-10-02T12:38:20+00:00"
         },
         {
+            "name": "codekandis/accumail-entities",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codekandis/accumail-entities.git",
+                "reference": "4fc3ec5760d75e9bda8d7cbb2962afe4950db5c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codekandis/accumail-entities/zipball/4fc3ec5760d75e9bda8d7cbb2962afe4950db5c7",
+                "reference": "4fc3ec5760d75e9bda8d7cbb2962afe4950db5c7",
+                "shasum": ""
+            },
+            "require": {
+                "codekandis/entities": "^0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\AccuMailEntities\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/accumail-entities` is a library providing interfaces, classes and enumerations for `codekandis/accumail`.",
+            "keywords": [
+                "accumail",
+                "accumulated",
+                "classes",
+                "distribution",
+                "e-mail",
+                "entities",
+                "enumerations",
+                "interfaces",
+                "library",
+                "php"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/accumail-entities/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/accumail-entities/issues",
+                "source": "https://github.com/codekandis/accumail-entities/tree/master"
+            },
+            "time": "2021-11-08T18:00:12+00:00"
+        },
+        {
             "name": "codekandis/authentication",
             "version": "0.3.0",
             "source": {
@@ -131,23 +194,19 @@
         },
         {
             "name": "codekandis/configurations",
-            "version": "0.1.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/configurations.git",
-                "reference": "a804abc24c73508a98c8f6add040560edf389df0"
+                "reference": "763c30efdb12b66655b1f85db7f51ebf89a3cfaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/configurations/zipball/a804abc24c73508a98c8f6add040560edf389df0",
-                "reference": "a804abc24c73508a98c8f6add040560edf389df0",
+                "url": "https://api.github.com/repos/codekandis/configurations/zipball/763c30efdb12b66655b1f85db7f51ebf89a3cfaf",
+                "reference": "763c30efdb12b66655b1f85db7f51ebf89a3cfaf",
                 "shasum": ""
             },
             "require": {
-                "ext-pcov": "*",
-                "ext-soap": "*",
-                "ext-uopz": "*",
-                "ext-xdebug": "*",
                 "php": "^7.4"
             },
             "require-dev": {
@@ -174,9 +233,8 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library provides interfaces and base classes for configuration purposes.",
+            "description": "`codekandis/configurations` is a library providing configuration interfaces and classes.",
             "keywords": [
-                "base",
                 "classes",
                 "configurations",
                 "interfaces",
@@ -189,33 +247,30 @@
                 "issues": "https://github.com/codekandis/configurations/issues",
                 "source": "https://github.com/codekandis/configurations/tree/master"
             },
-            "time": "2021-07-12T08:30:49+00:00"
+            "time": "2021-11-05T07:20:38+00:00"
         },
         {
             "name": "codekandis/console",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/console.git",
-                "reference": "8aef7270864186546b23a703cbea7d1a453be1fe"
+                "reference": "65187d7a1e198f50dce510fc27447484b16bca04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/console/zipball/8aef7270864186546b23a703cbea7d1a453be1fe",
-                "reference": "8aef7270864186546b23a703cbea7d1a453be1fe",
+                "url": "https://api.github.com/repos/codekandis/console/zipball/65187d7a1e198f50dce510fc27447484b16bca04",
+                "reference": "65187d7a1e198f50dce510fc27447484b16bca04",
                 "shasum": ""
             },
             "require": {
-                "ext-pcov": "*",
-                "ext-soap": "*",
-                "ext-uopz": "*",
-                "ext-xdebug": "*",
                 "php": "^7.4",
                 "psr/log": "^1",
                 "symfony/console": "^5"
             },
             "require-dev": {
                 "codekandis/phpunit": "^3",
+                "ext-xdebug": "*",
                 "roave/security-advisories": "dev-master"
             },
             "type": "library",
@@ -238,7 +293,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library provides enhancements for `symfony/console`.",
+            "description": "`codekandis/console` is a library providing enhancements for `symfony/console`.",
             "keywords": [
                 "Enhancements",
                 "console",
@@ -252,7 +307,7 @@
                 "issues": "https://github.com/codekandis/console/issues",
                 "source": "https://github.com/codekandis/console/tree/master"
             },
-            "time": "2021-09-18T20:09:40+00:00"
+            "time": "2021-11-08T06:06:04+00:00"
         },
         {
             "name": "codekandis/constants-classes-translator",
@@ -312,6 +367,121 @@
                 "source": "https://github.com/codekandis/constants-classes-translator/tree/master"
             },
             "time": "2021-01-17T15:59:37+00:00"
+        },
+        {
+            "name": "codekandis/converters",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codekandis/converters.git",
+                "reference": "7d3da3efe56f26250afaa41434feba22e2695e8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codekandis/converters/zipball/7d3da3efe56f26250afaa41434feba22e2695e8d",
+                "reference": "7d3da3efe56f26250afaa41434feba22e2695e8d",
+                "shasum": ""
+            },
+            "require": {
+                "codekandis/regular-expressions": "^0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\Converters\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/converters` is a library providing converter interfaces and classes.",
+            "keywords": [
+                "classes",
+                "converters",
+                "interfaces",
+                "library",
+                "php"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/converters/blob/master/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/converters/issues",
+                "source": "https://github.com/codekandis/converters/tree/master"
+            },
+            "time": "2021-11-05T22:54:12+00:00"
+        },
+        {
+            "name": "codekandis/entities",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codekandis/entities.git",
+                "reference": "e3b61b9ee7d954ace418c71b2faf1e518241f700"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codekandis/entities/zipball/e3b61b9ee7d954ace418c71b2faf1e518241f700",
+                "reference": "e3b61b9ee7d954ace418c71b2faf1e518241f700",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\Entities\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/entities` is a library providing entity interfaces and classes.",
+            "keywords": [
+                "classes",
+                "entities",
+                "interfaces",
+                "php"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/entities/blob/master/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/entities/issues",
+                "source": "https://github.com/codekandis/entities/tree/master"
+            },
+            "time": "2021-10-23T08:43:33+00:00"
         },
         {
             "name": "codekandis/json-codec",
@@ -434,23 +604,19 @@
         },
         {
             "name": "codekandis/logging",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/logging.git",
-                "reference": "b6ea2003d48082435c4daa04741e5f13d6098e53"
+                "reference": "41a08932d45a5dbb2dbcc78aea269b285befccbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/logging/zipball/b6ea2003d48082435c4daa04741e5f13d6098e53",
-                "reference": "b6ea2003d48082435c4daa04741e5f13d6098e53",
+                "url": "https://api.github.com/repos/codekandis/logging/zipball/41a08932d45a5dbb2dbcc78aea269b285befccbb",
+                "reference": "41a08932d45a5dbb2dbcc78aea269b285befccbb",
                 "shasum": ""
             },
             "require": {
-                "ext-pcov": "*",
-                "ext-soap": "*",
-                "ext-uopz": "*",
-                "ext-xdebug": "*",
                 "monolog/monolog": "^2",
                 "php": "^7.4",
                 "psr/log": "^1",
@@ -480,7 +646,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library provides interfaces and classes respecting the interfaces of `psr/log`.",
+            "description": "`codekandis/logging` is a library providing logging interfaces and classes respecting the interfaces of `psr/log`.",
             "keywords": [
                 "classes",
                 "interfaces",
@@ -496,7 +662,66 @@
                 "issues": "https://github.com/codekandis/logging/issues",
                 "source": "https://github.com/codekandis/logging/tree/master"
             },
-            "time": "2021-08-26T12:01:04+00:00"
+            "time": "2021-10-25T10:01:24+00:00"
+        },
+        {
+            "name": "codekandis/persistence",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codekandis/persistence.git",
+                "reference": "803eb0156bc603560fdd22d5f38ab8b74ef70b53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codekandis/persistence/zipball/803eb0156bc603560fdd22d5f38ab8b74ef70b53",
+                "reference": "803eb0156bc603560fdd22d5f38ab8b74ef70b53",
+                "shasum": ""
+            },
+            "require": {
+                "codekandis/entities": "^0",
+                "ext-pdo": "*",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\Persistence\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/persistence` is a library providing database connector and repository interfaces and classes.",
+            "keywords": [
+                "classes",
+                "interfaces",
+                "library",
+                "persistence",
+                "php"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/persistence/blob/master/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/persistence/issues",
+                "source": "https://github.com/codekandis/persistence/tree/master"
+            },
+            "time": "2021-11-08T07:25:13+00:00"
         },
         {
             "name": "codekandis/phlags",
@@ -554,16 +779,16 @@
         },
         {
             "name": "codekandis/regular-expressions",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/regular-expressions.git",
-                "reference": "47b7168f2bad37b08382e7913de37ed28c368e87"
+                "reference": "0fe539171c8ef4dfe8e19b8e3e9104a24adf2384"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/regular-expressions/zipball/47b7168f2bad37b08382e7913de37ed28c368e87",
-                "reference": "47b7168f2bad37b08382e7913de37ed28c368e87",
+                "url": "https://api.github.com/repos/codekandis/regular-expressions/zipball/0fe539171c8ef4dfe8e19b8e3e9104a24adf2384",
+                "reference": "0fe539171c8ef4dfe8e19b8e3e9104a24adf2384",
                 "shasum": ""
             },
             "require": {
@@ -593,11 +818,12 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library provides interfaces and classes for regular expressions.",
+            "description": "`codekandis/regular-expressions` is a library to provide regular expression interfaces and classes.",
             "keywords": [
                 "classes",
                 "expressions",
                 "interfaces",
+                "library",
                 "php",
                 "regex",
                 "regular"
@@ -608,7 +834,7 @@
                 "issues": "https://github.com/codekandis/regular-expressions/issues",
                 "source": "https://github.com/codekandis/regular-expressions/tree/master"
             },
-            "time": "2021-08-12T21:25:10+00:00"
+            "time": "2021-10-24T19:31:05+00:00"
         },
         {
             "name": "codekandis/sentry-client",
@@ -677,19 +903,20 @@
         },
         {
             "name": "codekandis/session",
-            "version": "0.2.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/session.git",
-                "reference": "34f05ea9631a17b9832ab2601facad47ea15d208"
+                "reference": "0f9bb401838082afa33e6b0446f7454f16b0c993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/session/zipball/34f05ea9631a17b9832ab2601facad47ea15d208",
-                "reference": "34f05ea9631a17b9832ab2601facad47ea15d208",
+                "url": "https://api.github.com/repos/codekandis/session/zipball/0f9bb401838082afa33e6b0446f7454f16b0c993",
+                "reference": "0f9bb401838082afa33e6b0446f7454f16b0c993",
                 "shasum": ""
             },
             "require": {
+                "codekandis/configurations": "^0",
                 "php": "^7.4"
             },
             "require-dev": {
@@ -716,9 +943,11 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library provides interfaces and classes for a proper session handling.",
+            "description": "`codekandis/configurations` is a library providing session handling interfaces and classes.",
             "keywords": [
+                "classes",
                 "handling",
+                "interfaces",
                 "library",
                 "php",
                 "session"
@@ -729,24 +958,26 @@
                 "issues": "https://github.com/codekandis/session/issues",
                 "source": "https://github.com/codekandis/session/tree/master"
             },
-            "time": "2021-01-29T09:00:47+00:00"
+            "time": "2021-10-19T18:36:11+00:00"
         },
         {
             "name": "codekandis/tiphy",
-            "version": "0.35.1",
+            "version": "0.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/tiphy.git",
-                "reference": "ae10ba06db6eecee7c5a44b5cae9a5ea85c0f86e"
+                "reference": "f1e705df8f1705714f90445cd374725d0e7dc59b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/tiphy/zipball/ae10ba06db6eecee7c5a44b5cae9a5ea85c0f86e",
-                "reference": "ae10ba06db6eecee7c5a44b5cae9a5ea85c0f86e",
+                "url": "https://api.github.com/repos/codekandis/tiphy/zipball/f1e705df8f1705714f90445cd374725d0e7dc59b",
+                "reference": "f1e705df8f1705714f90445cd374725d0e7dc59b",
                 "shasum": ""
             },
             "require": {
+                "codekandis/configurations": "^0",
                 "codekandis/constants-classes-translator": "^1.0",
+                "codekandis/entities": "^0",
                 "codekandis/json-codec": "^2",
                 "codekandis/regular-expressions": "^0",
                 "php": "^7.4"
@@ -788,24 +1019,27 @@
                 "issues": "https://github.com/codekandis/tiphy/issues",
                 "source": "https://github.com/codekandis/tiphy/tree/master"
             },
-            "time": "2021-10-11T05:14:21+00:00"
+            "time": "2021-10-18T23:28:52+00:00"
         },
         {
             "name": "codekandis/tiphy-authentication-integration",
-            "version": "0.7.0",
+            "version": "0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codekandis/tiphy-authentication-integration.git",
-                "reference": "8ebbe8916e7a914385a34e3266422e094e8ba3dc"
+                "reference": "f123182c7b27dd111da57b779f80f4b1272e19fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/tiphy-authentication-integration/zipball/8ebbe8916e7a914385a34e3266422e094e8ba3dc",
-                "reference": "8ebbe8916e7a914385a34e3266422e094e8ba3dc",
+                "url": "https://api.github.com/repos/codekandis/tiphy-authentication-integration/zipball/f123182c7b27dd111da57b779f80f4b1272e19fe",
+                "reference": "f123182c7b27dd111da57b779f80f4b1272e19fe",
                 "shasum": ""
             },
             "require": {
                 "codekandis/authentication": "^0",
+                "codekandis/converters": "^0",
+                "codekandis/entities": "^0",
+                "codekandis/persistence": "^0",
                 "codekandis/tiphy": "^0",
                 "php": "^7.4"
             },
@@ -846,23 +1080,83 @@
                 "issues": "https://github.com/codekandis/tiphy-authentication-integration/issues",
                 "source": "https://github.com/codekandis/tiphy-authentication-integration/tree/master"
             },
-            "time": "2021-10-09T22:11:37+00:00"
+            "time": "2021-11-08T09:35:50+00:00"
         },
         {
-            "name": "codekandis/tiphy-sentry-client-integration",
-            "version": "0.7.1",
+            "name": "codekandis/tiphy-persistence-integration",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/codekandis/tiphy-sentry-client-integration.git",
-                "reference": "df66eaf89d961f91c8fd0e389c354a5e1449f228"
+                "url": "https://github.com/codekandis/tiphy-persistence-integration.git",
+                "reference": "45315a30599afbcaa9d378b34d51481500ef1ebc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codekandis/tiphy-sentry-client-integration/zipball/df66eaf89d961f91c8fd0e389c354a5e1449f228",
-                "reference": "df66eaf89d961f91c8fd0e389c354a5e1449f228",
+                "url": "https://api.github.com/repos/codekandis/tiphy-persistence-integration/zipball/45315a30599afbcaa9d378b34d51481500ef1ebc",
+                "reference": "45315a30599afbcaa9d378b34d51481500ef1ebc",
                 "shasum": ""
             },
             "require": {
+                "codekandis/persistence": "^0",
+                "codekandis/tiphy": "^0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\TiphyPersistenceIntegration\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/tiphy-persistence-integration` is a library integrating `codekandis/persistence` into `codekandis/tiphy`.",
+            "keywords": [
+                "integration",
+                "library",
+                "persistence",
+                "php",
+                "tiphy"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/tiphy-persistence-integration/blob/master/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/tiphy-persistence-integration/issues",
+                "source": "https://github.com/codekandis/tiphy-persistence-integration/tree/master"
+            },
+            "time": "2021-10-19T17:49:31+00:00"
+        },
+        {
+            "name": "codekandis/tiphy-sentry-client-integration",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codekandis/tiphy-sentry-client-integration.git",
+                "reference": "413dd4b58898672c4bcee76e623dd238603c2343"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codekandis/tiphy-sentry-client-integration/zipball/413dd4b58898672c4bcee76e623dd238603c2343",
+                "reference": "413dd4b58898672c4bcee76e623dd238603c2343",
+                "shasum": ""
+            },
+            "require": {
+                "codekandis/configurations": "^0",
                 "codekandis/sentry-client": "^1",
                 "codekandis/tiphy": "^0",
                 "php": "^7.4"
@@ -891,10 +1185,11 @@
                     "role": "Developer"
                 }
             ],
-            "description": "This library is an integration of `codekandis/sentry-client` into `codekandis/tiphy`.",
+            "description": "`codekandis/tiphy-sentry-client-integration` is a library to integrate `codekandis/sentry-client` into `codekandis/tiphy`.",
             "keywords": [
                 "client",
                 "integration",
+                "library",
                 "php",
                 "sentry",
                 "tiphy"
@@ -905,20 +1200,77 @@
                 "issues": "https://github.com/codekandis/tiphy-sentry-client-integration/issues",
                 "source": "https://github.com/codekandis/tiphy-sentry-client-integration/tree/master"
             },
-            "time": "2021-09-04T17:45:45+00:00"
+            "time": "2021-10-18T22:29:30+00:00"
         },
         {
-            "name": "guzzlehttp/promises",
-            "version": "1.5.0",
+            "name": "codekandis/validators",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/promises.git",
-                "reference": "136a635e2b4a49b9d79e9c8fee267ffb257fdba0"
+                "url": "https://github.com/codekandis/validators.git",
+                "reference": "56b466b95f4bc1cc9ac82106e77cb013ba0965ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/136a635e2b4a49b9d79e9c8fee267ffb257fdba0",
-                "reference": "136a635e2b4a49b9d79e9c8fee267ffb257fdba0",
+                "url": "https://api.github.com/repos/codekandis/validators/zipball/56b466b95f4bc1cc9ac82106e77cb013ba0965ee",
+                "reference": "56b466b95f4bc1cc9ac82106e77cb013ba0965ee",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "codekandis/phpunit": "^3",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeKandis\\Validators\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Ramelow",
+                    "email": "info@codekandis.net",
+                    "homepage": "https://codekandis.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "`codekandis/validators` is a library providing converter interfaces and classes.",
+            "keywords": [
+                "classes",
+                "interfaces",
+                "library",
+                "php",
+                "validators"
+            ],
+            "support": {
+                "docs": "https://github.com/codekandis/validators/blob/master/README.md",
+                "email": "info@codekandis.net",
+                "issues": "https://github.com/codekandis/validators/issues",
+                "source": "https://github.com/codekandis/validators/tree/master"
+            },
+            "time": "2021-10-18T13:46:15+00:00"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
+                "reference": "fe752aedc9fd8fcca3fe7ad05d419d32998a06da",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +1325,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.0"
+                "source": "https://github.com/guzzle/promises/tree/1.5.1"
             },
             "funding": [
                 {
@@ -989,7 +1341,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-07T13:05:22+00:00"
+            "time": "2021-10-22T20:56:57+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1787,20 +2139,20 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -1829,9 +2181,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.1"
+                "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/http-client",
@@ -2246,16 +2598,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.3.7",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8b1008344647462ae6ec57559da166c2bfa5e16a"
+                "reference": "d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8b1008344647462ae6ec57559da166c2bfa5e16a",
-                "reference": "8b1008344647462ae6ec57559da166c2bfa5e16a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3",
+                "reference": "d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3",
                 "shasum": ""
             },
             "require": {
@@ -2325,7 +2677,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.3.7"
+                "source": "https://github.com/symfony/console/tree/v5.3.10"
             },
             "funding": [
                 {
@@ -2341,7 +2693,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-25T20:02:16+00:00"
+            "time": "2021-10-26T09:30:15+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2412,16 +2764,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.3.8",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "c6370fe2c0a445aedc08f592a6a3149da1fea4c7"
+                "reference": "710b69ed4bc9469900ec5ae5c3807b0509bee0dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/c6370fe2c0a445aedc08f592a6a3149da1fea4c7",
-                "reference": "c6370fe2c0a445aedc08f592a6a3149da1fea4c7",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/710b69ed4bc9469900ec5ae5c3807b0509bee0dc",
+                "reference": "710b69ed4bc9469900ec5ae5c3807b0509bee0dc",
                 "shasum": ""
             },
             "require": {
@@ -2479,7 +2831,7 @@
             "description": "Provides powerful methods to fetch HTTP resources synchronously or asynchronously",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v5.3.8"
+                "source": "https://github.com/symfony/http-client/tree/v5.3.10"
             },
             "funding": [
                 {
@@ -2495,7 +2847,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-07T10:45:28+00:00"
+            "time": "2021-10-19T08:32:53+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -3290,16 +3642,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.7",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "8d224396e28d30f81969f083a58763b8b9ceb0a5"
+                "reference": "d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/8d224396e28d30f81969f083a58763b8b9ceb0a5",
-                "reference": "8d224396e28d30f81969f083a58763b8b9ceb0a5",
+                "url": "https://api.github.com/repos/symfony/string/zipball/d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c",
+                "reference": "d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c",
                 "shasum": ""
             },
             "require": {
@@ -3353,7 +3705,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.7"
+                "source": "https://github.com/symfony/string/tree/v5.3.10"
             },
             "funding": [
                 {
@@ -3369,7 +3721,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-26T08:00:08+00:00"
+            "time": "2021-10-27T18:21:46+00:00"
         }
     ],
     "packages-dev": [
@@ -3434,16 +3786,16 @@
         },
         {
             "name": "dms/phpunit-arraysubset-asserts",
-            "version": "v0.3.0",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdohms/phpunit-arraysubset-asserts.git",
-                "reference": "8c5038a36860511ef579c48afd36d553b3f8c23f"
+                "reference": "e1b47df99cd0dbb3f63528adc5c990256218c707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdohms/phpunit-arraysubset-asserts/zipball/8c5038a36860511ef579c48afd36d553b3f8c23f",
-                "reference": "8c5038a36860511ef579c48afd36d553b3f8c23f",
+                "url": "https://api.github.com/repos/rdohms/phpunit-arraysubset-asserts/zipball/e1b47df99cd0dbb3f63528adc5c990256218c707",
+                "reference": "e1b47df99cd0dbb3f63528adc5c990256218c707",
                 "shasum": ""
             },
             "require": {
@@ -3451,7 +3803,7 @@
                 "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
             },
             "require-dev": {
-                "dms/coding-standard": "^8",
+                "dms/coding-standard": "^9",
                 "squizlabs/php_codesniffer": "^3.4"
             },
             "type": "library",
@@ -3473,9 +3825,9 @@
             "description": "This package provides ArraySubset and related asserts once deprecated in PHPUnit 8",
             "support": {
                 "issues": "https://github.com/rdohms/phpunit-arraysubset-asserts/issues",
-                "source": "https://github.com/rdohms/phpunit-arraysubset-asserts/tree/v0.3.0"
+                "source": "https://github.com/rdohms/phpunit-arraysubset-asserts/tree/v0.3.1"
             },
-            "time": "2021-04-22T08:17:59+00:00"
+            "time": "2021-10-17T18:50:58+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -3606,16 +3958,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.13.0",
+            "version": "v4.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "50953a2691a922aa1769461637869a0a2faa3f53"
+                "reference": "63a79e8daa781cac14e5195e63ed8ae231dd10fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/50953a2691a922aa1769461637869a0a2faa3f53",
-                "reference": "50953a2691a922aa1769461637869a0a2faa3f53",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/63a79e8daa781cac14e5195e63ed8ae231dd10fd",
+                "reference": "63a79e8daa781cac14e5195e63ed8ae231dd10fd",
                 "shasum": ""
             },
             "require": {
@@ -3656,9 +4008,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.1"
             },
-            "time": "2021-09-20T12:20:58+00:00"
+            "time": "2021-11-03T20:52:16+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -3826,16 +4178,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/622548b623e81ca6d78b721c5e029f4ce664f170",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170",
                 "shasum": ""
             },
             "require": {
@@ -3846,7 +4198,8 @@
                 "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "mockery/mockery": "~1.3.2"
+                "mockery/mockery": "~1.3.2",
+                "psalm/phar": "^4.8"
             },
             "type": "library",
             "extra": {
@@ -3876,9 +4229,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
             },
-            "time": "2020-09-03T19:13:55+00:00"
+            "time": "2021-10-19T17:43:47+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -3999,23 +4352,23 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.7",
+            "version": "9.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "d4c798ed8d51506800b441f7a13ecb0f76f12218"
+                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/d4c798ed8d51506800b441f7a13ecb0f76f12218",
-                "reference": "d4c798ed8d51506800b441f7a13ecb0f76f12218",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^4.12.0",
+                "nikic/php-parser": "^4.13.0",
                 "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
@@ -4064,7 +4417,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.7"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
             },
             "funding": [
                 {
@@ -4072,7 +4425,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-17T05:39:03+00:00"
+            "time": "2021-10-30T08:01:38+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4424,12 +4777,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0488e161600117fc3a0d72397dad154729002f54"
+                "reference": "bad3752fd78f4a07acb24e56fec0366aa711f150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0488e161600117fc3a0d72397dad154729002f54",
-                "reference": "0488e161600117fc3a0d72397dad154729002f54",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/bad3752fd78f4a07acb24e56fec0366aa711f150",
+                "reference": "bad3752fd78f4a07acb24e56fec0366aa711f150",
                 "shasum": ""
             },
             "conflict": {
@@ -4453,23 +4806,26 @@
                 "bolt/bolt": "<3.7.2",
                 "bolt/core": "<4.1.13",
                 "brightlocal/phpwhois": "<=4.2.5",
-                "buddypress/buddypress": "<5.1.2",
+                "buddypress/buddypress": "<7.2.1",
                 "bugsnag/bugsnag-laravel": ">=2,<2.0.2",
                 "cachethq/cachet": "<2.5.1",
                 "cakephp/cakephp": ">=1.3,<1.3.18|>=2,<2.4.99|>=2.5,<2.5.99|>=2.6,<2.6.12|>=2.7,<2.7.6|>=3,<3.5.18|>=3.6,<3.6.15|>=3.7,<3.7.7",
+                "cardgate/magento2": "<2.0.33",
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
                 "cartalyst/sentry": "<=2.1.6",
+                "catfan/medoo": "<1.7.5",
                 "centreon/centreon": "<20.10.7",
                 "cesnet/simplesamlphp-module-proxystatistics": "<3.1",
                 "codeception/codeception": "<3.1.3|>=4,<4.1.22",
                 "codeigniter/framework": "<=3.0.6",
                 "codiad/codiad": "<=2.8.4",
-                "composer/composer": "<1.10.22|>=2-alpha.1,<2.0.13",
+                "composer/composer": "<1.10.23|>=2-alpha.1,<2.1.9",
+                "concrete5/concrete5": "<8.5.5",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
                 "contao/core": ">=2,<3.5.39",
                 "contao/core-bundle": ">=4,<4.4.56|>=4.5,<4.9.18|>=4.10,<4.11.7|= 4.10.0",
                 "contao/listing-bundle": ">=4,<4.4.8",
-                "craftcms/cms": "<3.6.7",
+                "craftcms/cms": "<3.7.14",
                 "croogo/croogo": "<3.0.7",
                 "datadog/dd-trace": ">=0.30,<0.30.2",
                 "david-garcia/phpwhois": "<=4.3.1",
@@ -4509,7 +4865,7 @@
                 "ezsystems/platform-ui-assets-bundle": ">=4.2,<4.2.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
-                "facade/ignition": "<1.16.14|>=2,<2.4.2|>=2.5,<2.5.2",
+                "facade/ignition": "<2.4.2|>=2.5,<2.5.2",
                 "feehi/cms": "<=2.1.1",
                 "feehi/feehicms": "<=0.1.3",
                 "firebase/php-jwt": "<2",
@@ -4527,16 +4883,18 @@
                 "friendsoftypo3/mediace": ">=7.6.2,<7.6.5",
                 "froala/wysiwyg-editor": "<3.2.7",
                 "fuel/core": "<1.8.1",
-                "getgrav/grav": "<1.7.21",
+                "getgrav/grav": "<1.7.24",
                 "getkirby/cms": "<=3.5.6",
                 "getkirby/panel": "<2.5.14",
                 "gilacms/gila": "<=1.11.4",
+                "globalpayments/php-sdk": "<2",
                 "gos/web-socket-bundle": "<1.10.4|>=2,<2.6.1|>=3,<3.3",
                 "gree/jose": "<=2.2",
                 "gregwar/rst": "<1.0.3",
-                "grumpydictator/firefly-iii": "<5.6.1",
+                "grumpydictator/firefly-iii": "<=5.6.2",
                 "guzzlehttp/guzzle": ">=4-rc.2,<4.2.4|>=5,<5.3.1|>=6,<6.2.1",
                 "helloxz/imgurl": "<=2.31",
+                "hjue/justwriting": "<=1",
                 "ibexa/post-install": "<=1.0.4",
                 "icecoder/icecoder": "<=8",
                 "illuminate/auth": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.10",
@@ -4548,7 +4906,7 @@
                 "in2code/femanager": "<5.5.1|>=6,<6.3.1",
                 "intelliants/subrion": "<=4.2.1",
                 "ivankristianto/phpwhois": "<=4.3",
-                "james-heinrich/getid3": "<1.9.9",
+                "james-heinrich/getid3": "<1.9.21",
                 "joomla/archive": "<1.1.10",
                 "joomla/session": "<1.3.1",
                 "jsmitty12/phpwhois": "<5.1",
@@ -4566,6 +4924,7 @@
                 "league/flysystem": "<1.1.4|>=2,<2.1.1",
                 "lexik/jwt-authentication-bundle": "<2.10.7|>=2.11,<2.11.3",
                 "librenms/librenms": "<21.1",
+                "limesurvey/limesurvey": "<3.27.19",
                 "livewire/livewire": ">2.2.4,<2.2.6",
                 "lms/routes": "<2.1.1",
                 "localizationteam/l10nmgr": "<7.4|>=8,<8.7|>=9,<9.2",
@@ -4576,10 +4935,12 @@
                 "marcwillmann/turn": "<0.3.3",
                 "mautic/core": "<4|= 2.13.1",
                 "mediawiki/core": ">=1.27,<1.27.6|>=1.29,<1.29.3|>=1.30,<1.30.2|>=1.31,<1.31.9|>=1.32,<1.32.6|>=1.32.99,<1.33.3|>=1.33.99,<1.34.3|>=1.34.99,<1.35",
+                "microweber/microweber": "<1.2.8",
                 "miniorange/miniorange-saml": "<1.4.3",
                 "mittwald/typo3_forum": "<1.2.1",
+                "modx/revolution": "<2.8",
                 "monolog/monolog": ">=1.8,<1.12",
-                "moodle/moodle": "<3.5.17|>=3.7,<3.7.9|>=3.8,<3.8.8|>=3.9,<3.9.5|>=3.10,<3.10.2",
+                "moodle/moodle": "<3.5.17|>=3.7,<3.7.9|>=3.8,<3.8.8|>=3.9,<3.9.5|>=3.10-beta,<3.10.2",
                 "namshi/jose": "<2.2",
                 "neos/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.12|>=3.1,<3.1.10|>=3.2,<3.2.13|>=3.3,<3.3.13|>=4,<4.0.6",
                 "neos/form": ">=1.2,<4.3.3|>=5,<5.0.9|>=5.1,<5.1.3",
@@ -4593,9 +4954,9 @@
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
                 "october/backend": "<1.1.2",
                 "october/cms": "= 1.1.1|= 1.0.471|= 1.0.469|>=1.0.319,<1.0.469",
-                "october/october": ">=1.0.319,<1.0.466",
+                "october/october": "<2.1.12",
                 "october/rain": "<1.0.472|>=1.1,<1.1.2",
-                "october/system": "<1.0.472|>=1.1.1,<1.1.5",
+                "october/system": "<2.1.12",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "opencart/opencart": "<=3.0.3.2",
@@ -4632,10 +4993,11 @@
                 "prestashop/productcomments": ">=4,<4.2.1",
                 "prestashop/ps_emailsubscription": "<2.6.1",
                 "prestashop/ps_facetedsearch": "<3.4.1",
+                "prestashop/ps_linklist": "<3.1",
                 "privatebin/privatebin": "<1.2.2|>=1.3,<1.3.2",
                 "propel/propel": ">=2-alpha.1,<=2-alpha.7",
                 "propel/propel1": ">=1,<=1.7.1",
-                "pterodactyl/panel": "<0.7.19|>=1-rc.0,<=1-rc.6",
+                "pterodactyl/panel": "<0.7.19|>=1-rc.0,<=1-rc.6|>=1,<1.6.3",
                 "pusher/pusher-php-server": "<2.2.1",
                 "pwweb/laravel-core": "<=0.3.6-beta",
                 "rainlab/debugbar-plugin": "<3.1",
@@ -4649,15 +5011,15 @@
                 "shopware/core": "<=6.4.3",
                 "shopware/platform": "<=6.4.3",
                 "shopware/production": "<=6.3.5.2",
-                "shopware/shopware": "<5.6.10",
+                "shopware/shopware": "<5.7.6",
                 "showdoc/showdoc": "<=2.9.8",
-                "silverstripe/admin": ">=1.0.3,<1.0.4|>=1.1,<1.1.1",
+                "silverstripe/admin": "<4.8.1",
                 "silverstripe/assets": ">=1,<1.4.7|>=1.5,<1.5.2",
                 "silverstripe/cms": "<4.3.6|>=4.4,<4.4.4",
                 "silverstripe/comments": ">=1.3,<1.9.99|>=2,<2.9.99|>=3,<3.1.1",
                 "silverstripe/forum": "<=0.6.1|>=0.7,<=0.7.3",
                 "silverstripe/framework": "<4.7.4",
-                "silverstripe/graphql": "<=3.5|>=4-alpha.1,<4-alpha.2",
+                "silverstripe/graphql": "<3.5.2|>=4-alpha.1,<4-alpha.2",
                 "silverstripe/registry": ">=2.1,<2.1.2|>=2.2,<2.2.1",
                 "silverstripe/restfulserver": ">=1,<1.0.9|>=2,<2.0.4",
                 "silverstripe/subsites": ">=2,<2.1.1",
@@ -4670,6 +5032,7 @@
                 "simplito/elliptic-php": "<1.0.6",
                 "slim/slim": "<2.6",
                 "smarty/smarty": "<3.1.39",
+                "snipe/snipe-it": "<5.3",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spoonity/tcpdf": "<6.2.22",
@@ -4678,11 +5041,12 @@
                 "stormpath/sdk": ">=0,<9.9.99",
                 "studio-42/elfinder": "<2.1.59",
                 "subrion/cms": "<=4.2.1",
-                "sulu/sulu": "<1.6.41|>=2,<2.0.10|>=2.1,<2.1.1",
+                "sulu/sulu": "<1.6.43|>=2,<2.0.10|>=2.1,<2.1.1",
                 "swiftmailer/swiftmailer": ">=4,<5.4.5",
                 "sylius/admin-bundle": ">=1,<1.0.17|>=1.1,<1.1.9|>=1.2,<1.2.2",
                 "sylius/grid": ">=1,<1.1.19|>=1.2,<1.2.18|>=1.3,<1.3.13|>=1.4,<1.4.5|>=1.5,<1.5.1",
                 "sylius/grid-bundle": ">=1,<1.1.19|>=1.2,<1.2.18|>=1.3,<1.3.13|>=1.4,<1.4.5|>=1.5,<1.5.1",
+                "sylius/paypal-plugin": ">=1,<1.2.4|>=1.3,<1.3.1",
                 "sylius/resource-bundle": "<1.3.14|>=1.4,<1.4.7|>=1.5,<1.5.2|>=1.6,<1.6.4",
                 "sylius/sylius": "<1.6.9|>=1.7,<1.7.9|>=1.8,<1.8.3|>=1.9,<1.9.5",
                 "symbiote/silverstripe-multivaluefield": ">=3,<3.0.99",
@@ -4723,15 +5087,16 @@
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
                 "thelia/thelia": ">=2.1-beta.1,<2.1.3",
                 "theonedemon/phpwhois": "<=4.2.5",
+                "tinymce/tinymce": "<5.10",
                 "titon/framework": ">=0,<9.9.99",
                 "topthink/think": "<=6.0.9",
                 "topthink/thinkphp": "<=3.2.3",
                 "tribalsystems/zenario": "<8.8.53370",
                 "truckersmp/phpwhois": "<=4.3.1",
                 "twig/twig": "<1.38|>=2,<2.7",
-                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.38|>=9,<9.5.29|>=10,<10.4.19|>=11,<11.3.2",
+                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.38|>=9,<9.5.29|>=10,<10.4.19|>=11,<11.5",
                 "typo3/cms-backend": ">=7,<=7.6.50|>=8,<=8.7.39|>=9,<=9.5.24|>=10,<=10.4.13|>=11,<=11.1",
-                "typo3/cms-core": ">=6.2,<=6.2.56|>=7,<=7.6.52|>=8,<=8.7.41|>=9,<9.5.29|>=10,<10.4.19|>=11,<11.3.2",
+                "typo3/cms-core": ">=6.2,<=6.2.56|>=7,<=7.6.52|>=8,<=8.7.41|>=9,<9.5.29|>=10,<10.4.19|>=11,<11.5",
                 "typo3/cms-form": ">=8,<=8.7.39|>=9,<=9.5.24|>=10,<=10.4.13|>=11,<=11.1",
                 "typo3/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.12|>=3.1,<3.1.10|>=3.2,<3.2.13|>=3.3,<3.3.13|>=4,<4.0.6",
                 "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4|>=2.3,<2.3.99|>=3,<3.0.20|>=3.1,<3.1.18|>=3.2,<3.2.14|>=3.3,<3.3.23|>=4,<4.0.17|>=4.1,<4.1.16|>=4.2,<4.2.12|>=4.3,<4.3.3",
@@ -4744,6 +5109,7 @@
                 "verot/class.upload.php": "<=1.0.3|>=2,<=2.0.4",
                 "vrana/adminer": "<4.7.9",
                 "wallabag/tcpdf": "<6.2.22",
+                "wanglelecc/laracms": "<=1.0.3",
                 "web-auth/webauthn-framework": ">=3.3,<3.3.4",
                 "webcoast/deferred-image-processing": "<1.0.2",
                 "wikimedia/parsoid": "<0.12.2",
@@ -4821,7 +5187,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-30T18:03:50+00:00"
+            "time": "2021-11-06T03:15:13+00:00"
         },
         {
             "name": "sebastian/cli-parser",

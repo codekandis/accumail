@@ -1,9 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\ServerConnectionEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableServerConnectionEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\ServerConnectionEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\ServerConnectionEntityInterface;
 
 /**
  * Represents the interface of any repository of any server connection entity.
@@ -20,10 +21,10 @@ interface ServerConnectionEntityRepositoryInterface
 
 	/**
 	 * Reads a server connection by its record ID.
-	 * @param ServerConnectionEntityInterface $serverConnection The server connection with the record ID to find.
+	 * @param PersistableServerConnectionEntityInterface $serverConnection The server connection with the record ID to find.
 	 * @return ?ServerConnectionEntityInterface The server connection if found, otherwise null.
 	 */
-	public function readServerConnectionByRecordId( ServerConnectionEntityInterface $serverConnection ): ?ServerConnectionEntityInterface;
+	public function readServerConnectionByRecordId( PersistableServerConnectionEntityInterface $serverConnection ): ?ServerConnectionEntityInterface;
 
 	/**
 	 * Reads a server connection by its ID.
@@ -43,7 +44,7 @@ interface ServerConnectionEntityRepositoryInterface
 	 * Creates a server connection by its job ID.
 	 * @param ServerConnectionEntityInterface $serverConnection The server connection to create.
 	 * @param JobEntityInterface $job The job with the job ID.
-	 * @return ServerConnectionEntityInterface The server connection with the record ID of the created server connection.
+	 * @return PersistableServerConnectionEntityInterface The server connection with the record ID of the created server connection.
 	 */
-	public function createServerConnectionByJobId( ServerConnectionEntityInterface $serverConnection, JobEntityInterface $job ): ServerConnectionEntityInterface;
+	public function createServerConnectionByJobId( ServerConnectionEntityInterface $serverConnection, JobEntityInterface $job ): PersistableServerConnectionEntityInterface;
 }

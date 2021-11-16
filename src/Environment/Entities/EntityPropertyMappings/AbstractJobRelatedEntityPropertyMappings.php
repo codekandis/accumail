@@ -1,9 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings;
 
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMapping;
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMappingExistsException;
-use CodeKandis\Tiphy\Entities\EntityPropertyMappings\EntityPropertyMappingInterface;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMapping;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMappingExistsException;
+use CodeKandis\Entities\EntityPropertyMappings\EntityPropertyMappingInterface;
 
 /**
  * Represents the base class of any job related entity property mappings.

@@ -1,18 +1,19 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\ApiKeyEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\Collections\ApiKeyEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\ApiKeyEntityCollectionInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\ApiKeyEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\ApiKeyEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\ApiKeyEntityCollectionInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -63,7 +64,7 @@ class ApiKeyEntityRepository extends AbstractRepository implements ApiKeyEntityR
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readApiKeyByRecordId( ApiKeyEntityInterface $apiKey ): ?ApiKeyEntityInterface
+	public function readApiKeyByRecordId( PersistableApiKeyEntityInterface $apiKey ): ?ApiKeyEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -76,11 +77,15 @@ class ApiKeyEntityRepository extends AbstractRepository implements ApiKeyEntityR
 				0, 1;
 		END;
 
-		$apiKeyEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableApiKeyEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableApiKeyEntityPropertyMapper();
+		$apiKeyEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildApiKeyEntityPropertyMapper();
-		$mappedApiKey               = $apiKeyEntityPropertyMapper->mapToArray( $apiKey );
-		$arguments                  = [
-			'_id' => $mappedApiKey[ '_id' ]
+
+		$mappedPersistableApiKey = $persistableApiKeyEntityPropertyMapper->mapToArray( $apiKey );
+
+		$arguments = [
+			'_id' => $mappedPersistableApiKey[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $apiKeyEntityPropertyMapper );
@@ -112,8 +117,10 @@ class ApiKeyEntityRepository extends AbstractRepository implements ApiKeyEntityR
 
 		$apiKeyEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildApiKeyEntityPropertyMapper();
-		$mappedApiKey               = $apiKeyEntityPropertyMapper->mapToArray( $apiKey );
-		$arguments                  = [
+
+		$mappedApiKey = $apiKeyEntityPropertyMapper->mapToArray( $apiKey );
+
+		$arguments = [
 			'id' => $mappedApiKey[ 'id' ]
 		];
 

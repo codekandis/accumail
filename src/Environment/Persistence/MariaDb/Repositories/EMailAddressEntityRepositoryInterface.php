@@ -1,9 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailAddressEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableEMailAddressEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\EMailAddressEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailAddressEntityInterface;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
 
 /**
  * Represents the interface of any repository of any e-mail address entity.
@@ -28,10 +29,10 @@ interface EMailAddressEntityRepositoryInterface
 
 	/**
 	 * Reads an e-mail address by its record ID.
-	 * @param EMailAddressEntityInterface $eMailAddress The e-mail address with the record ID to find.
+	 * @param PersistableEMailAddressEntityInterface $eMailAddress The e-mail address with the record ID to find.
 	 * @return ?EMailAddressEntityInterface The e-mail address if found, otherwise null.
 	 */
-	public function readEMailAddressByRecordId( EMailAddressEntityInterface $eMailAddress ): ?EMailAddressEntityInterface;
+	public function readEMailAddressByRecordId( PersistableEMailAddressEntityInterface $eMailAddress ): ?EMailAddressEntityInterface;
 
 	/**
 	 * Reads an e-mail address by its ID.
@@ -51,7 +52,7 @@ interface EMailAddressEntityRepositoryInterface
 	 * Creates an e-mail address by its e-mail ID.
 	 * @param EMailAddressEntityInterface $eMailAddress The e-mail address to create.
 	 * @param EMailEntityInterface $eMail The e-mail with the e-mail ID.
-	 * @return EMailAddressEntityInterface The e-mail address with the record ID of the created e-mail address.
+	 * @return PersistableEMailAddressEntityInterface The e-mail address with the record ID of the created e-mail address.
 	 */
-	public function createEMailAddressByEMailId( EMailAddressEntityInterface $eMailAddress, EMailEntityInterface $eMail ): EMailAddressEntityInterface;
+	public function createEMailAddressByEMailId( EMailAddressEntityInterface $eMailAddress, EMailEntityInterface $eMail ): PersistableEMailAddressEntityInterface;
 }

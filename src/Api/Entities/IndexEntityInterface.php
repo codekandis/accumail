@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Api\Entities;
 
-use CodeKandis\Tiphy\Entities\EntityInterface;
+use CodeKandis\Entities\EntityInterface;
 
 /**
  * Represents the interface of all index entities.

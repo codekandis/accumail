@@ -2,18 +2,14 @@
 namespace CodeKandis\AccuMail\Configurations;
 
 use CodeKandis\Configurations\ConfigurationRegistryInterface;
-use CodeKandis\Tiphy\Persistence\PersistenceConfigurationInterface;
+use CodeKandis\TiphyPersistenceIntegration\Configurations\ConfigurationRegistryInterface as PersistenceConfigurationRegistryInterface;
+use CodeKandis\TiphySentryClientIntegration\Configurations\ConfigurationRegistryInterface as SentryClientConfigurationRegistryInterface;
 
 /**
  * Represents the interface of any CLI configuration registry.
  * @package codekandis/accumail
  * @author Christian Ramelow <info@codekandis.net>
  */
-interface CliConfigurationRegistryInterface extends ConfigurationRegistryInterface
+interface CliConfigurationRegistryInterface extends ConfigurationRegistryInterface, SentryClientConfigurationRegistryInterface, PersistenceConfigurationRegistryInterface
 {
-	/**
-	 * Gets the persistence configuration.
-	 * @return ?PersistenceConfigurationInterface The path of the persistence configuration.
-	 */
-	public function getPersistenceConfiguration(): ?PersistenceConfigurationInterface;
 }

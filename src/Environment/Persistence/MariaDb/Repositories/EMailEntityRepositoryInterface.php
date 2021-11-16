@@ -1,9 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\EMailEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableEMailEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\EMailEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\EMailEntityInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
 
 /**
  * Represents the interface of any repository of any e-mail entity.
@@ -20,10 +21,10 @@ interface EMailEntityRepositoryInterface
 
 	/**
 	 * Reads an e-mail by its record ID.
-	 * @param EMailEntityInterface $eMail The e-mail with the record ID to find.
+	 * @param PersistableEMailEntityInterface $eMail The e-mail with the record ID to find.
 	 * @return ?EMailEntityInterface The e-mail if found, otherwise null.
 	 */
-	public function readEMailByRecordId( EMailEntityInterface $eMail ): ?EMailEntityInterface;
+	public function readEMailByRecordId( PersistableEMailEntityInterface $eMail ): ?EMailEntityInterface;
 
 	/**
 	 * Reads an e-mail by its ID.
@@ -43,7 +44,7 @@ interface EMailEntityRepositoryInterface
 	 * Creates an e-mail by its job ID.
 	 * @param EMailEntityInterface $eMail The e-mail to create.
 	 * @param JobEntityInterface $job The job with the job ID.
-	 * @return EMailEntityInterface The e-mail with the record ID of the created e-mail.
+	 * @return PersistableEMailEntityInterface The e-mail with the record ID of the created e-mail.
 	 */
-	public function createEMailByJobId( EMailEntityInterface $eMail, JobEntityInterface $job ): EMailEntityInterface;
+	public function createEMailByJobId( EMailEntityInterface $eMail, JobEntityInterface $job ): PersistableEMailEntityInterface;
 }

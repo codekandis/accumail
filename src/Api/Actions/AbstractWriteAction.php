@@ -5,7 +5,7 @@ use CodeKandis\AccuMail\Environment\Errors\CommonErrorCodes;
 use CodeKandis\AccuMail\Environment\Errors\CommonErrorMessages;
 use CodeKandis\Tiphy\Http\ContentTypes;
 use CodeKandis\Tiphy\Http\Requests\BadRequestException;
-use CodeKandis\Tiphy\Validators\ArrayValidators\MappedArrayValidatorInterface;
+use CodeKandis\Validators\ArrayValidators\MappedArrayValidatorInterface;
 use function is_object;
 use function property_exists;
 use function strtolower;

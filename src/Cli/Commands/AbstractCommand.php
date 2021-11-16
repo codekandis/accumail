@@ -3,8 +3,8 @@ namespace CodeKandis\AccuMail\Cli\Commands;
 
 use CodeKandis\AccuMail\Configurations\CliConfigurationRegistryInterface;
 use CodeKandis\Console\Commands\LoggableCommand;
-use CodeKandis\Tiphy\Persistence\MariaDb\Connector;
-use CodeKandis\Tiphy\Persistence\MariaDb\ConnectorInterface;
+use CodeKandis\Persistence\Connector;
+use CodeKandis\Persistence\ConnectorInterface;
 use Psr\Log\LoggerInterface;
 
 /**

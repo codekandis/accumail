@@ -1,9 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\EMails;
 
-use CodeKandis\AccuMail\Environment\Entities\Enumerations\EncryptionTypes;
 use CodeKandis\AccuMail\Environment\Entities\Enumerations\PhpMailerEncryptionTypes;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\Enumerations\EncryptionTypes;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
 use CodeKandis\ConstantsClassesTranslator\ConstantsClassesTranslator;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -88,15 +88,15 @@ class Mailer implements MailerInterface
 			);
 		}
 
+		$phpMailer->CharSet = PHPMailer::CHARSET_UTF8;
+
 		$phpMailer->Subject = $this->job->getEMail()->getSubject();
 
-		if ( '' !== $this->job->getEMail()->getHtmlBody() )
+		$phpMailer->isHTML( $this->job->getEMail()->getIsHtmlBody() );
+		$phpMailer->Body = $this->job->getEMail()->getBody();
+		if ( null !== $this->job->getEMail()->getAlternativeBody() )
 		{
-			$phpMailer->Body = $this->job->getEMail()->getHtmlBody();
-		}
-		if ( '' !== $this->job->getEMail()->getPlainTextBody() )
-		{
-			$phpMailer->AltBody = $this->job->getEMail()->getPlainTextBody();
+			$phpMailer->AltBody = $this->job->getEMail()->getAlternativeBody();
 		}
 
 		$phpMailer->send();

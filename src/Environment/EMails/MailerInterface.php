@@ -11,5 +11,5 @@ interface MailerInterface
 	/**
 	 * Processes the job.
 	 */
-	public function process():void;
+	public function process(): void;
 }

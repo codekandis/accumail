@@ -2,11 +2,11 @@
 namespace CodeKandis\AccuMail\Configurations;
 
 use CodeKandis\Configurations\AbstractConfigurationRegistry;
-use CodeKandis\SentryClient\Configurations\SentryClientConfigurationInterface;
-use CodeKandis\Tiphy\Persistence\PersistenceConfiguration;
-use CodeKandis\Tiphy\Persistence\PersistenceConfigurationInterface;
+use CodeKandis\Configurations\PlainConfigurationLoader;
+use CodeKandis\TiphyPersistenceIntegration\Configurations\ConfigurationRegistryTrait as PersistenceConfigurationRegistryTrait;
+use CodeKandis\TiphyPersistenceIntegration\Configurations\PersistenceConfiguration;
+use CodeKandis\TiphySentryClientIntegration\Configurations\ConfigurationRegistryTrait as SentryClientConfigurationRegistryTrait;
 use CodeKandis\TiphySentryClientIntegration\Configurations\SentryClientConfiguration;
-use function array_merge;
 use function dirname;
 
 /**
@@ -16,17 +16,8 @@ use function dirname;
  */
 class CliConfigurationRegistry extends AbstractConfigurationRegistry implements CliConfigurationRegistryInterface
 {
-	/**
-	 * Stores the sentry client configuration.
-	 * @var ?SentryClientConfigurationInterface
-	 */
-	private ?SentryClientConfigurationInterface $sentryClientConfiguration = null;
-
-	/**
-	 * Stores the persistence configuration.
-	 * @var ?PersistenceConfigurationInterface
-	 */
-	private ?PersistenceConfigurationInterface $persistenceConfiguration = null;
+	use SentryClientConfigurationRegistryTrait;
+	use PersistenceConfigurationRegistryTrait;
 
 	/**
 	 * Creates the singleton instance of the CLI configuration registry.
@@ -40,35 +31,19 @@ class CliConfigurationRegistry extends AbstractConfigurationRegistry implements 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getSentryClientConfiguration(): ?SentryClientConfigurationInterface
-	{
-		return $this->sentryClientConfiguration;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getPersistenceConfiguration(): ?PersistenceConfigurationInterface
-	{
-		return $this->persistenceConfiguration;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	protected function initialize(): void
 	{
 		$this->sentryClientConfiguration = new SentryClientConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/sentryClient.php',
-				require dirname( __DIR__, 2 ) . '/config/sentryClient.php'
-			)
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'sentryClient' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'sentryClient' )
+				->getPlainConfiguration()
 		);
 		$this->persistenceConfiguration  = new PersistenceConfiguration(
-			array_merge(
-				require __DIR__ . '/Plain/persistence.php',
-				require dirname( __DIR__, 2 ) . '/config/persistence.php'
-			)
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'persistence' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'persistence' )
+				->getPlainConfiguration()
 		);
 	}
 }

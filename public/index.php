@@ -2,11 +2,11 @@
 namespace CodeKandis\AccuMail;
 
 use CodeKandis\AccuMail\Configurations\ApiConfigurationRegistry;
+use CodeKandis\Persistence\Connector;
 use CodeKandis\SentryClient\SentryClient;
 use CodeKandis\Tiphy\Actions\ActionDispatcher;
-use CodeKandis\Tiphy\Persistence\MariaDb\Connector;
 use CodeKandis\TiphyAuthenticationIntegration\Actions\PreDispatchment\Api\AuthorizationHeaderKeyAuthenticationPreDispatcher;
-use CodeKandis\TiphyAuthenticationIntegration\Persistence\Repositories\Authentication\UsersRepository;
+use CodeKandis\TiphyAuthenticationIntegration\Persistence\MariaDb\Repositories\Authentication\UsersRepository;
 use CodeKandis\TiphySentryClientIntegration\Throwables\Handlers\InternalServerErrorThrowableHandler;
 use function dirname;
 use function error_reporting;

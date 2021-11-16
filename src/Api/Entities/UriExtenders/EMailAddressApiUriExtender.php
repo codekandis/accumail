@@ -2,7 +2,7 @@
 namespace CodeKandis\AccuMail\Api\Entities\UriExtenders;
 
 use CodeKandis\AccuMail\Api\Http\UriBuilders\ApiUriBuilderInterface;
-use CodeKandis\AccuMail\Environment\Entities\EMailAddressEntityInterface;
+use CodeKandis\AccuMailEntities\EMailAddressEntityInterface;
 
 /**
  * Represents an API URI extender of any e-mail address.

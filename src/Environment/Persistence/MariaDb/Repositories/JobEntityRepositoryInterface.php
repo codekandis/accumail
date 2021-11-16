@@ -1,9 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\JobEntityCollectionInterface;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\UserEntityInterface;
+use CodeKandis\AccuMail\Environment\Entities\PersistableJobEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\JobEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\UserEntityInterface;
 
 /**
  * Represents the interface of any repository of any job entity.
@@ -27,10 +28,10 @@ interface JobEntityRepositoryInterface
 
 	/**
 	 * Reads a job by its record ID.
-	 * @param JobEntityInterface $job The job with the record ID to find.
+	 * @param PersistableJobEntityInterface $job The job with the record ID to find.
 	 * @return ?JobEntityInterface The job if found, otherwise null.
 	 */
-	public function readJobByRecordId( JobEntityInterface $job ): ?JobEntityInterface;
+	public function readJobByRecordId( PersistableJobEntityInterface $job ): ?JobEntityInterface;
 
 	/**
 	 * Reads a job by its ID.
@@ -43,9 +44,9 @@ interface JobEntityRepositoryInterface
 	 * Creates a job by its user ID.
 	 * @param JobEntityInterface $job The job to create.
 	 * @param UserEntityInterface $user The user creating the job.
-	 * @return JobEntityInterface The job with the record ID of the created job.
+	 * @return PersistableJobEntityInterface The job with the record ID of the created job.
 	 */
-	public function createJobByUserId( JobEntityInterface $job, UserEntityInterface $user ): JobEntityInterface;
+	public function createJobByUserId( JobEntityInterface $job, UserEntityInterface $user ): PersistableJobEntityInterface;
 
 	/**
 	 * Updates the status of a job.

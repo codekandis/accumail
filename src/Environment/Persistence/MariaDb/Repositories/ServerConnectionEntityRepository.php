@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\ServerConnectionEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\ServerConnectionEntityCollectionInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntity;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntityInterface;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\InvalidArgumentsStatementsCountException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableServerConnectionEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\ServerConnectionEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\ServerConnectionEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\ServerConnectionEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\InvalidArgumentsStatementsCountException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -66,7 +66,7 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readServerConnectionByRecordId( ServerConnectionEntityInterface $serverConnection ): ?ServerConnectionEntityInterface
+	public function readServerConnectionByRecordId( PersistableServerConnectionEntityInterface $serverConnection ): ?ServerConnectionEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -79,11 +79,15 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 				0, 1;
 		END;
 
-		$serverConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableServerConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableServerConnectionEntityPropertyMapper();
+		$serverConnectionEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
-		$mappedServerConnection               = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
-		$arguments                            = [
-			'_id' => $mappedServerConnection[ '_id' ]
+
+		$mappedPersistableServerConnection = $persistableServerConnectionEntityPropertyMapper->mapToArray( $serverConnection );
+
+		$arguments = [
+			'_id' => $mappedPersistableServerConnection[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $serverConnectionEntityPropertyMapper );
@@ -115,8 +119,10 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 
 		$serverConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
-		$mappedServerConnection               = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
-		$arguments                            = [
+
+		$mappedServerConnection = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
+
+		$arguments = [
 			'id' => $mappedServerConnection[ 'id' ]
 		];
 
@@ -152,8 +158,10 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 			->buildJobEntityPropertyMapper();
 		$serverConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
-		$mappedJob                            = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments                            = [
+
+		$mappedJob = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'jobId' => $mappedJob[ 'id' ]
 		];
 
@@ -171,7 +179,7 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 	 * @throws StatementPreparationFailedException The preparation of the statement failed.
 	 * @throws StatementExecutionFailedException The execution of the statement failed.
 	 */
-	public function createServerConnectionByJobId( ServerConnectionEntityInterface $serverConnection, JobEntityInterface $job ): ServerConnectionEntityInterface
+	public function createServerConnectionByJobId( ServerConnectionEntityInterface $serverConnection, JobEntityInterface $job ): PersistableServerConnectionEntityInterface
 	{
 		$query = <<< END
 			INSERT INTO
@@ -181,13 +189,17 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 				( UUID( ), :jobId, :host, :port, :encryptionType );
 		END;
 
-		$serverConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$serverConnectionEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
-		$mappedServerConnection               = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
-		$jobEntityPropertyMapper              = ( new EntityPropertyMapperBuilder() )
+		$jobEntityPropertyMapper                         = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob                            = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments                            = [
+		$persistableServerConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableServerConnectionEntityPropertyMapper();
+
+		$mappedServerConnection = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
+		$mappedJob              = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'jobId'          => $mappedJob[ 'id' ],
 			'host'           => $mappedServerConnection[ 'host' ],
 			'port'           => $mappedServerConnection[ 'port' ],
@@ -196,7 +208,7 @@ class ServerConnectionEntityRepository extends AbstractRepository implements Ser
 
 		$this->databaseConnector->execute( $query, $arguments );
 
-		return ServerConnectionEntity::fromArray(
+		return $persistableServerConnectionEntityPropertyMapper->mapFromArray(
 			[
 				'_id' => $this->databaseConnector->getLastInsertId()
 			]

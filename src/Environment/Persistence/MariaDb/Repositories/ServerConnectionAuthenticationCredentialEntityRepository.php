@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\ServerConnectionAuthenticationCredentialEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\ServerConnectionAuthenticationCredentialEntityCollectionInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionAuthenticationCredentialEntity;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionAuthenticationCredentialEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\ServerConnectionEntityInterface;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\InvalidArgumentsStatementsCountException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableServerConnectionAuthenticationCredentialEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\ServerConnectionAuthenticationCredentialEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\ServerConnectionAuthenticationCredentialEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\ServerConnectionAuthenticationCredentialEntityInterface;
+use CodeKandis\AccuMailEntities\ServerConnectionEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\InvalidArgumentsStatementsCountException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -66,7 +66,7 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readServerConnectionAuthenticationCredentialByRecordId( ServerConnectionAuthenticationCredentialEntityInterface $serverConnectionAuthenticationCredential ): ?ServerConnectionAuthenticationCredentialEntityInterface
+	public function readServerConnectionAuthenticationCredentialByRecordId( PersistableServerConnectionAuthenticationCredentialEntityInterface $serverConnectionAuthenticationCredential ): ?ServerConnectionAuthenticationCredentialEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -79,11 +79,15 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 				0, 1;
 		END;
 
-		$serverConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableServerConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableServerConnectionAuthenticationCredentialEntityPropertyMapper();
+		$serverConnectionAuthenticationCredentialEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionAuthenticationCredentialEntityPropertyMapper();
-		$mappedServerConnectionAuthenticationCredential               = $serverConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
-		$arguments                                                    = [
-			'_id' => $mappedServerConnectionAuthenticationCredential[ '_id' ]
+
+		$mappedPersistableServerConnectionAuthenticationCredential = $persistableServerConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
+
+		$arguments = [
+			'_id' => $mappedPersistableServerConnectionAuthenticationCredential[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $serverConnectionAuthenticationCredentialEntityPropertyMapper );
@@ -115,8 +119,10 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 
 		$serverConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionAuthenticationCredentialEntityPropertyMapper();
-		$mappedServerConnectionAuthenticationCredential               = $serverConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
-		$arguments                                                    = [
+
+		$mappedServerConnectionAuthenticationCredential = $serverConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
+
+		$arguments = [
 			'id' => $mappedServerConnectionAuthenticationCredential[ 'id' ]
 		];
 
@@ -148,11 +154,13 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 				0, 1;
 		END;
 
-		$serverConnectionEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$serverConnectionEntityPropertyMapper                         = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
 		$serverConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionAuthenticationCredentialEntityPropertyMapper();
+
 		$mappedServerConnection = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
+
 		$arguments = [
 			'serverConnectionId' => $mappedServerConnection[ 'id' ]
 		];
@@ -171,7 +179,7 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 	 * @throws StatementPreparationFailedException The preparation of the statement failed.
 	 * @throws StatementExecutionFailedException The execution of the statement failed.
 	 */
-	public function createServerConnectionAuthenticationCredentialByServerConnectionId( ServerConnectionAuthenticationCredentialEntityInterface $serverConnectionAuthenticationCredential, ServerConnectionEntityInterface $serverConnection ): ServerConnectionAuthenticationCredentialEntityInterface
+	public function createServerConnectionAuthenticationCredentialByServerConnectionId( ServerConnectionAuthenticationCredentialEntityInterface $serverConnectionAuthenticationCredential, ServerConnectionEntityInterface $serverConnection ): PersistableServerConnectionAuthenticationCredentialEntityInterface
 	{
 		$query = <<< END
 			INSERT INTO
@@ -181,13 +189,17 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 				( UUID( ), :serverConnectionId, :username, :password );
 		END;
 
-		$serverConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$serverConnectionAuthenticationCredentialEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionAuthenticationCredentialEntityPropertyMapper();
-		$mappedServerConnectionAuthenticationCredential               = $serverConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
-		$serverConnectionEntityPropertyMapper                         = ( new EntityPropertyMapperBuilder() )
+		$serverConnectionEntityPropertyMapper                                    = ( new EntityPropertyMapperBuilder() )
 			->buildServerConnectionEntityPropertyMapper();
-		$mappedServerConnection                                       = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
-		$arguments                                                    = [
+		$persistableServerConnectionAuthenticationCredentialEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableServerConnectionAuthenticationCredentialEntityPropertyMapper();
+
+		$mappedServerConnectionAuthenticationCredential = $serverConnectionAuthenticationCredentialEntityPropertyMapper->mapToArray( $serverConnectionAuthenticationCredential );
+		$mappedServerConnection                         = $serverConnectionEntityPropertyMapper->mapToArray( $serverConnection );
+
+		$arguments = [
 			'serverConnectionId' => $mappedServerConnection[ 'id' ],
 			'username'           => $mappedServerConnectionAuthenticationCredential[ 'username' ],
 			'password'           => $mappedServerConnectionAuthenticationCredential[ 'password' ]
@@ -195,7 +207,7 @@ class ServerConnectionAuthenticationCredentialEntityRepository extends AbstractR
 
 		$this->databaseConnector->execute( $query, $arguments );
 
-		return ServerConnectionAuthenticationCredentialEntity::fromArray(
+		return $persistableServerConnectionAuthenticationCredentialEntityPropertyMapper->mapFromArray(
 			[
 				'_id' => $this->databaseConnector->getLastInsertId()
 			]

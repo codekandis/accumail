@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\AccuMail\Environment\Persistence\MariaDb\Repositories;
 
-use CodeKandis\AccuMail\Environment\Entities\Collections\JobEntityCollection;
-use CodeKandis\AccuMail\Environment\Entities\Collections\JobEntityCollectionInterface;
 use CodeKandis\AccuMail\Environment\Entities\EntityPropertyMappings\EntityPropertyMapperBuilder;
-use CodeKandis\AccuMail\Environment\Entities\JobEntity;
-use CodeKandis\AccuMail\Environment\Entities\JobEntityInterface;
-use CodeKandis\AccuMail\Environment\Entities\UserEntityInterface;
-use CodeKandis\Tiphy\Persistence\MariaDb\FetchingResultFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\InvalidArgumentsStatementsCountException;
-use CodeKandis\Tiphy\Persistence\MariaDb\Repositories\AbstractRepository;
-use CodeKandis\Tiphy\Persistence\MariaDb\SettingFetchModeFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementExecutionFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\StatementPreparationFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionCommitFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionRollbackFailedException;
-use CodeKandis\Tiphy\Persistence\MariaDb\TransactionStartFailedException;
+use CodeKandis\AccuMail\Environment\Entities\PersistableJobEntityInterface;
+use CodeKandis\AccuMailEntities\Collections\JobEntityCollection;
+use CodeKandis\AccuMailEntities\Collections\JobEntityCollectionInterface;
+use CodeKandis\AccuMailEntities\JobEntityInterface;
+use CodeKandis\AccuMailEntities\UserEntityInterface;
+use CodeKandis\Persistence\FetchingResultFailedException;
+use CodeKandis\Persistence\InvalidArgumentsStatementsCountException;
+use CodeKandis\Persistence\Repositories\AbstractRepository;
+use CodeKandis\Persistence\SettingFetchModeFailedException;
+use CodeKandis\Persistence\StatementExecutionFailedException;
+use CodeKandis\Persistence\StatementPreparationFailedException;
+use CodeKandis\Persistence\TransactionCommitFailedException;
+use CodeKandis\Persistence\TransactionRollbackFailedException;
+use CodeKandis\Persistence\TransactionStartFailedException;
 use ReflectionException;
 
 /**
@@ -81,8 +81,10 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 
 		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob               = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments               = [
+
+		$mappedJob = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'status' => $mappedJob[ 'status' ]
 		];
 
@@ -102,7 +104,7 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 	 * @throws SettingFetchModeFailedException The setting of the fetch mode of the statement failed.
 	 * @throws FetchingResultFailedException The fetching of the statment result failed.
 	 */
-	public function readJobByRecordId( JobEntityInterface $job ): ?JobEntityInterface
+	public function readJobByRecordId( PersistableJobEntityInterface $job ): ?JobEntityInterface
 	{
 		$query = <<< END
 			SELECT
@@ -115,11 +117,15 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 				0, 1;
 		END;
 
-		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$persistableJobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableJobEntityPropertyMapper();
+		$jobEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob               = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments               = [
-			'_id' => $mappedJob[ '_id' ]
+
+		$mappedPersistableJob = $persistableJobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
+			'_id' => $mappedPersistableJob[ '_id' ]
 		];
 
 		return $this->databaseConnector->queryFirst( $query, $arguments, $jobEntityPropertyMapper );
@@ -151,8 +157,10 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 
 		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob               = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments               = [
+
+		$mappedJob = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'id' => $mappedJob[ 'id' ]
 		];
 
@@ -170,7 +178,7 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 	 * @throws StatementPreparationFailedException The preparation of the statement failed.
 	 * @throws StatementExecutionFailedException The execution of the statement failed.
 	 */
-	public function createJobByUserId( JobEntityInterface $job, UserEntityInterface $user ): JobEntityInterface
+	public function createJobByUserId( JobEntityInterface $job, UserEntityInterface $user ): PersistableJobEntityInterface
 	{
 		$query = <<< END
 			INSERT INTO
@@ -180,13 +188,17 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 				( UUID( ), :userId, :status, :timestampCreated );
 		END;
 
-		$jobEntityPropertyMapper  = ( new EntityPropertyMapperBuilder() )
+		$jobEntityPropertyMapper            = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob                = $jobEntityPropertyMapper->mapToArray( $job );
-		$userEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+		$userEntityPropertyMapper           = ( new EntityPropertyMapperBuilder() )
 			->buildUserEntityPropertyMapper();
-		$mappedUser               = $userEntityPropertyMapper->mapToArray( $user );
-		$arguments                = [
+		$persistableJobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
+			->buildPersistableJobEntityPropertyMapper();
+
+		$mappedJob  = $jobEntityPropertyMapper->mapToArray( $job );
+		$mappedUser = $userEntityPropertyMapper->mapToArray( $user );
+
+		$arguments = [
 			'userId'           => $mappedUser[ 'id' ],
 			'status'           => $mappedJob[ 'status' ],
 			'timestampCreated' => $mappedJob[ 'timestampCreated' ]
@@ -194,7 +206,7 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 
 		$this->databaseConnector->execute( $query, $arguments );
 
-		return JobEntity::fromArray(
+		return $persistableJobEntityPropertyMapper->mapFromArray(
 			[
 				'_id' => $this->databaseConnector->getLastInsertId()
 			]
@@ -225,8 +237,10 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 
 		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
 			->buildJobEntityPropertyMapper();
-		$mappedJob               = $jobEntityPropertyMapper->mapToArray( $job );
-		$arguments               = [
+
+		$mappedJob = $jobEntityPropertyMapper->mapToArray( $job );
+
+		$arguments = [
 			'id'                 => $mappedJob[ 'id' ],
 			'status'             => $mappedJob[ 'status' ],
 			'timestampProcessed' => $mappedJob[ 'timestampProcessed' ]
