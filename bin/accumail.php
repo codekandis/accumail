@@ -33,7 +33,7 @@ $sentryClient = new SentryClient(
 );
 $sentryClient->register();
 
-$application = new Application( 'codekandis/accumail', '0.1.2' );
+$application = new Application( 'codekandis/accumail', '0.2.0' );
 $application->setCatchExceptions( false );
 
 $applicationLoggerCollection = new ApplicationLoggerCollection();
