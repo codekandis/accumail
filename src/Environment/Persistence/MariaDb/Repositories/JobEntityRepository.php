@@ -44,7 +44,7 @@ class JobEntityRepository extends AbstractRepository implements JobEntityReposit
 			FROM
 				`jobs`
 			ORDER BY
-				`jobs`.`_id` ASC;
+				`jobs`.`_id` DESC;
 		END;
 
 		$jobEntityPropertyMapper = ( new EntityPropertyMapperBuilder() )
