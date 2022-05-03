@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [keep a changelog][xtlink-keep-a-changelog]
 and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioning].
 
+## [0.2.2] - 2022-05-03
+
+### Changed
+
+* bumped the composer package dependencies
+
+[0.2.2]: https://github.com/codekandis/accumail/compare/0.2.1..0.2.2
+
+---
 ## [0.2.1] - 2021-12-20
 
 ### Changed
